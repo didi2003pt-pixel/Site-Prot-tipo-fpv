@@ -1,0 +1,33 @@
+FPV — PROPOSTA DE EVOLUÇÃO DIGITAL 2026
+
+Objetivo
+Transformar o website da FPV de um portal essencialmente institucional num produto digital que coloque a vela portuguesa, os seus praticantes e serviços no centro.
+
+Princípios
+1. A vela primeiro; a burocracia depois.
+2. Serviços frequentes acessíveis em 1 clique.
+3. Competição apresentada como evento.
+4. Entrada simples para novos praticantes.
+5. Conteúdo institucional pesquisável.
+6. Mobile-first e acessível.
+7. Estrutura preparada para integração futura com CMS e sistemas oficiais.
+
+Protótipo incluído
+Homepage, Calendário, Notícias, Descobrir a Vela, Clubes e Federação.
+
+O que ainda não está incluído
+Backend, myFPV, bases de dados, autenticação, gestão editorial, migração de conteúdo e integrações oficiais.
+
+Próximo passo recomendado
+Validar a direção visual e a arquitetura de informação com a FPV antes de definir tecnologia de produção.
+
+
+REVISÃO DE ARQUITETURA
+Menu recomendado:
+Descobrir | Competição | Alto Rendimento | Formação | Clubes | Notícias | Federação | myFPV
+
+Alto Rendimento agrega:
+Atletas · Equipas FPV · Projeto Olímpico · LA 2028 · Critérios de Seleção · Resultados Internacionais · Classes Olímpicas
+
+Decisão:
+Não replicar a estrutura da FPF na vela. A terminologia e a arquitetura devem refletir a realidade da própria FPV.
