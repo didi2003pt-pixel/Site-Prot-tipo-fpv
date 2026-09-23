@@ -1,0 +1,592 @@
+/* FPV Visual V2 — editorial / atlantic direction
+   Isolated overrides for the visual-v2 branch. */
+
+.visual-v2{
+  --navy:#031827;
+  --navy-2:#072b42;
+  --ocean:#00a9df;
+  --sky:#8fd9f1;
+  --red:#df2438;
+  --ink:#071722;
+  --muted:#60717d;
+  --line:#d8e1e6;
+  --paper:#f3f6f7;
+  --radius:8px;
+  --radius-sm:6px;
+  --shadow:0 22px 70px rgba(3,24,39,.12);
+  background:#fff;
+}
+.visual-v2 .prototype-status{display:none}
+
+/* Header: less "app", more national sports institution */
+.visual-v2 .site-header{
+  background:linear-gradient(180deg,rgba(2,17,29,.82),rgba(2,17,29,.18));
+  border-bottom:1px solid rgba(255,255,255,.18);
+}
+.visual-v2 .site-header:after{
+  height:3px;
+  background:linear-gradient(90deg,var(--fpv-gold) 0 6%,var(--fpv-red) 6% 9%,var(--fpv-blue) 9% 15%,transparent 15%);
+}
+.visual-v2 .nav-shell{height:88px}
+.visual-v2 .brand{min-width:235px}
+.visual-v2 .brand-mark-official{width:52px;height:52px;flex-basis:52px}
+.visual-v2 .brand-copy strong{font-size:29px}
+.visual-v2 .desktop-nav{gap:28px}
+.visual-v2 .desktop-nav a{
+  font-size:11px;
+  letter-spacing:.035em;
+  text-transform:uppercase;
+}
+.visual-v2 .myfpv{
+  border-radius:4px;
+  background:#fff;
+  color:var(--navy);
+  border-color:#fff;
+  padding:11px 16px;
+}
+
+/* Hero: cinematic and unmistakably maritime */
+.visual-v2 .hero{
+  min-height:760px;
+  height:min(960px,100svh);
+  background:#02131f;
+}
+.visual-v2 .hero-media{
+  background-image:url("../assets/alto-projeto-olimpico.png");
+  background-size:cover;
+  background-position:center 43%;
+  transform:scale(1.01);
+}
+.visual-v2 .hero-overlay{
+  background:
+    linear-gradient(90deg,rgba(2,15,26,.94) 0%,rgba(2,15,26,.72) 34%,rgba(2,15,26,.18) 68%,rgba(2,15,26,.08) 100%),
+    linear-gradient(0deg,rgba(2,15,26,.82) 0%,transparent 45%);
+}
+.visual-v2 .hero:before{
+  content:"ATLÂNTICO · 38°43′N · 9°08′W";
+  position:absolute;
+  z-index:4;
+  right:28px;
+  top:50%;
+  transform:translateY(-50%) rotate(90deg);
+  transform-origin:center;
+  font-size:9px;
+  letter-spacing:.22em;
+  color:rgba(255,255,255,.68);
+}
+.visual-v2 .hero:after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  right:74px;
+  top:120px;
+  bottom:70px;
+  width:1px;
+  background:linear-gradient(transparent,rgba(255,255,255,.42),transparent);
+}
+.visual-v2 .hero-content{
+  align-items:flex-end;
+  padding-top:120px;
+  padding-bottom:82px;
+}
+.visual-v2 .hero-copy{max-width:860px}
+.visual-v2 .hero-kicker{
+  font-size:10px;
+  letter-spacing:.22em;
+  color:#d7e5ec;
+}
+.visual-v2 .hero-kicker i{width:48px;height:2px}
+.visual-v2 .hero h1{
+  font-size:clamp(72px,10.2vw,152px);
+  line-height:.78;
+  letter-spacing:-.075em;
+  margin:28px 0 34px;
+  max-width:900px;
+}
+.visual-v2 .hero h1 em{
+  color:#fff;
+  font-weight:500;
+  -webkit-text-stroke:1px rgba(255,255,255,.2);
+}
+.visual-v2 .hero-copy>p{
+  max-width:600px;
+  font-size:17px;
+  color:#d0dde4;
+  line-height:1.75;
+}
+.visual-v2 .hero-actions .btn{
+  min-height:52px;
+  border-radius:4px;
+  padding:0 22px;
+}
+.visual-v2 .hero-actions .btn-light{
+  background:var(--red);
+  color:#fff;
+  box-shadow:none;
+}
+.visual-v2 .hero-actions .btn-light:hover{background:#f02c42}
+.visual-v2 .hero-actions .btn-ghost{background:rgba(1,15,25,.28)}
+.visual-v2 .hero-status{
+  width:330px;
+  margin-bottom:10px;
+  padding:24px 0 10px 28px;
+  border-left:1px solid rgba(255,255,255,.28);
+}
+.visual-v2 .hero-status>span{color:#c4d3dc}
+.visual-v2 .wind{border-top:0;margin-top:12px;padding-top:8px}
+.visual-v2 .hero-scroll{left:auto;right:92px;transform:none}
+
+/* Primary access strip: dense, useful, sports-dashboard energy */
+.visual-v2 .quick-links{
+  background:var(--navy);
+  color:#fff;
+  border:0;
+}
+.visual-v2 .quick-grid a{
+  min-height:106px;
+  border-color:rgba(255,255,255,.12);
+  padding:20px 18px;
+}
+.visual-v2 .quick-grid a:first-child{border-left-color:rgba(255,255,255,.12)}
+.visual-v2 .quick-icon{color:#6e93a9}
+.visual-v2 .quick-grid strong{font-size:13px}
+.visual-v2 .quick-grid a:hover{
+  background:var(--ocean);
+  transform:none;
+}
+
+/* Editorial rhythm: fewer soft cards, more scale and lines */
+.visual-v2 .section{padding:132px 0}
+.visual-v2 .section-heading{
+  align-items:start;
+  margin-bottom:62px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--line);
+}
+.visual-v2 .section-heading h2{
+  font-size:clamp(46px,5.4vw,72px);
+  line-height:.94;
+  letter-spacing:-.055em;
+}
+.visual-v2 .section-heading .eyebrow{color:#6b7f8c}
+.visual-v2 .events-section{background:#fff}
+.visual-v2 .competition-gateway-home{
+  border-radius:0;
+  box-shadow:none;
+  border-top:3px solid var(--navy);
+  border-bottom:1px solid var(--line);
+}
+.visual-v2 .competition-gateway-home h3{
+  font-size:clamp(34px,4vw,56px);
+  max-width:720px;
+  letter-spacing:-.05em;
+}
+.visual-v2 .competition-home-links a{
+  border-radius:0;
+  border-color:var(--line);
+}
+.visual-v2 .competition-home-links a:hover{background:#edf7fb}
+
+/* Alto rendimento: flagship block */
+.visual-v2 .national-section{
+  position:relative;
+  background:#031827;
+  padding:0;
+}
+.visual-v2 .national-section:before{
+  content:"PERFORMANCE / PORTUGAL";
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%) rotate(-90deg);
+  transform-origin:center;
+  font-size:9px;
+  letter-spacing:.22em;
+  color:#6f91a5;
+}
+.visual-v2 .national-shell{
+  min-height:760px;
+  grid-template-columns:.86fr 1.14fr;
+  gap:0;
+}
+.visual-v2 .national-copy{
+  padding:92px 82px 92px 0;
+}
+.visual-v2 .national-copy h2{
+  font-size:clamp(58px,6.5vw,92px);
+}
+.visual-v2 .national-visual{
+  height:760px;
+  border-radius:0;
+  margin-right:calc((100vw - min(calc(100vw - 40px),1240px))/ -2);
+}
+.visual-v2 .national-photo{transform:none}
+.visual-v2 .national-photo-card:hover .national-photo{transform:scale(1.025)}
+.visual-v2 .stat-strip{gap:70px}
+
+/* Discover: photographic magazine grid */
+.visual-v2 .discover-preview{background:#f2f5f6}
+.visual-v2 .discover-grid{
+  grid-template-columns:1.25fr .75fr;
+  grid-template-rows:1fr 1fr;
+  gap:10px;
+}
+.visual-v2 .discover-card{
+  min-height:270px;
+  border-radius:0;
+}
+.visual-v2 .discover-card.big{
+  grid-row:1 / span 2;
+  min-height:550px;
+}
+.visual-v2 .discover-card:hover{transform:none;box-shadow:none}
+.visual-v2 .discover-card strong{font-size:clamp(27px,3vw,42px)}
+.visual-v2 .discover-card.big strong{font-size:clamp(38px,4.4vw,62px)}
+.visual-v2 .discover-card p{font-size:13px}
+
+/* News: editorial, not card-stack */
+.visual-v2 .news-section{background:#fff}
+.visual-v2 .news-grid{
+  grid-template-columns:1.5fr .5fr;
+  gap:54px;
+}
+.visual-v2 .news-image{
+  height:520px;
+  border-radius:0;
+}
+.visual-v2 .news-lead h3{
+  font-size:clamp(30px,3.2vw,46px);
+  max-width:850px;
+}
+.visual-v2 .news-side{border-top:3px solid var(--navy)}
+.visual-v2 .news-card{padding:30px 0}
+.visual-v2 .news-card h4{font-size:22px}
+
+/* Formation: strong national-program feel */
+.visual-v2 .formation-section{padding-top:50px}
+.visual-v2 .formation-shell{
+  border-radius:0;
+  padding:80px 76px;
+  background:
+    linear-gradient(105deg,rgba(3,24,39,.98),rgba(4,62,91,.94)),
+    url("../assets/descobrir-quero-experimentar.png") center/cover;
+  border-left:6px solid var(--red);
+}
+.visual-v2 .formation-shell h2{font-size:clamp(46px,5vw,68px)}
+.visual-v2 .formation-actions a{font-size:20px}
+
+/* Clubs / territory */
+.visual-v2 .club-preview{padding-top:70px}
+.visual-v2 .club-shell{
+  min-height:650px;
+  border-radius:0;
+  border:0;
+  background:#f2f5f6;
+}
+.visual-v2 .club-copy{padding:74px}
+.visual-v2 .club-copy h2{font-size:clamp(52px,5.7vw,78px)}
+.visual-v2 .club-preview .map-art{background:#05385e}
+.visual-v2 .club-copy .btn{border-radius:4px}
+
+/* Footer */
+.visual-v2 .site-footer{margin-top:0;background:#02131f}
+.visual-v2 .footer-top{padding-top:84px}
+.visual-v2 .footer-bottom{padding-bottom:36px}
+
+/* Micro-interactions */
+@media (hover:hover) and (pointer:fine){
+  .visual-v2 .quick-grid a:hover{transform:none}
+  .visual-v2 .discover-card:hover{transform:none}
+  .visual-v2 .discover-card:hover::after{transform:scale(1.025)}
+  .visual-v2 .news-image{transition:filter .35s,transform .35s}
+  .visual-v2 .news-image:hover{filter:saturate(1.08) contrast(1.03)}
+}
+
+/* Tablet */
+@media(max-width:1080px){
+  .visual-v2 .desktop-nav{gap:16px}
+  .visual-v2 .desktop-nav a{font-size:10px}
+  .visual-v2 .hero-status{display:none}
+  .visual-v2 .hero-copy{max-width:780px}
+  .visual-v2 .national-shell{grid-template-columns:1fr}
+  .visual-v2 .national-copy{padding:80px 0}
+  .visual-v2 .national-visual{
+    margin:0;
+    height:600px;
+  }
+}
+
+/* Mobile */
+@media(max-width:760px){
+  .visual-v2 .nav-shell{height:76px}
+  .visual-v2 .hero{
+    min-height:720px;
+    height:92svh;
+  }
+  .visual-v2 .hero-media{background-position:58% center}
+  .visual-v2 .hero:before,.visual-v2 .hero:after{display:none}
+  .visual-v2 .hero-content{
+    align-items:flex-end;
+    padding-top:100px;
+    padding-bottom:64px;
+  }
+  .visual-v2 .hero h1{
+    font-size:clamp(58px,19vw,88px);
+    line-height:.82;
+    margin:22px 0 25px;
+  }
+  .visual-v2 .hero-copy>p{font-size:14px}
+  .visual-v2 .hero-actions{gap:8px}
+  .visual-v2 .hero-actions .btn{
+    width:100%;
+    min-height:50px;
+  }
+  .visual-v2 .hero-scroll{display:none}
+  .visual-v2 .quick-grid{grid-template-columns:repeat(2,1fr)}
+  .visual-v2 .quick-grid a{min-height:90px}
+  .visual-v2 .section{padding:84px 0}
+  .visual-v2 .section-heading{
+    margin-bottom:38px;
+    padding-bottom:20px;
+  }
+  .visual-v2 .discover-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+  }
+  .visual-v2 .discover-card.big{
+    grid-row:auto;
+    min-height:430px;
+  }
+  .visual-v2 .discover-card{min-height:320px}
+  .visual-v2 .news-grid{grid-template-columns:1fr;gap:36px}
+  .visual-v2 .news-image{height:360px}
+  .visual-v2 .formation-shell{
+    padding:44px 24px;
+    border-left:4px solid var(--red);
+  }
+  .visual-v2 .club-shell{min-height:unset}
+  .visual-v2 .club-copy{padding:44px 24px}
+  .visual-v2 .national-visual{height:500px}
+}
+
+@media(max-width:420px){
+  .visual-v2 .quick-grid{grid-template-columns:1fr 1fr}
+  .visual-v2 .quick-grid a{padding:16px 12px}
+  .visual-v2 .quick-grid strong{font-size:12px}
+  .visual-v2 .hero h1{font-size:58px}
+}
+
+
+/* =========================================================
+   FPV VISUAL V2.1 — motion + editorial interaction pass
+   Inspired by modern reference-led web design: strong rules,
+   restrained motion, nautical plotting details, no generic UI.
+   ========================================================= */
+.visual-v2{
+  --ease-expo:cubic-bezier(.16,1,.3,1);
+  --ease-soft:cubic-bezier(.22,.61,.36,1);
+  --hero-x:72%;
+  --hero-y:28%;
+  --hero-shift:0px;
+  --hero-scale:1.015;
+}
+.visual-v2::selection{background:var(--ocean);color:#fff}
+.visual-v2 .site-header{
+  position:fixed;
+  background:linear-gradient(180deg,rgba(2,17,29,.58),rgba(2,17,29,.08));
+  transition:background .45s var(--ease-expo),backdrop-filter .45s var(--ease-expo),box-shadow .45s var(--ease-expo);
+}
+.visual-v2 .site-header.is-scrolled{
+  background:rgba(2,17,29,.82);
+  backdrop-filter:blur(18px) saturate(1.15);
+  -webkit-backdrop-filter:blur(18px) saturate(1.15);
+  box-shadow:0 10px 42px rgba(1,14,24,.16);
+}
+.visual-v2 .site-header.is-scrolled .nav-shell{height:78px}
+.visual-v2 .site-header .nav-shell{transition:height .45s var(--ease-expo)}
+
+.visual-v2 .v2-scroll-progress{
+  position:fixed;
+  z-index:90;
+  top:0;
+  left:0;
+  width:100%;
+  height:2px;
+  pointer-events:none;
+  background:rgba(255,255,255,.07);
+}
+.visual-v2 .v2-scroll-progress span{
+  display:block;
+  width:100%;
+  height:100%;
+  transform-origin:left center;
+  transform:scaleX(var(--scroll-progress,0));
+  background:linear-gradient(90deg,var(--fpv-red),var(--fpv-blue));
+  box-shadow:0 0 18px rgba(0,174,232,.4);
+}
+
+.visual-v2 .hero-media{
+  transform:translate3d(0,var(--hero-shift),0) scale(var(--hero-scale));
+  transition:transform .12s linear;
+  will-change:transform;
+}
+.visual-v2 .hero-overlay{
+  background:
+    radial-gradient(circle at var(--hero-x) var(--hero-y),rgba(141,220,245,.20),transparent 19%),
+    linear-gradient(90deg,rgba(2,15,26,.95) 0%,rgba(2,15,26,.73) 34%,rgba(2,15,26,.22) 68%,rgba(2,15,26,.10) 100%),
+    linear-gradient(0deg,rgba(2,15,26,.86) 0%,transparent 48%);
+}
+.visual-v2 .hero-overlay::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.16;
+  background-image:
+    linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.10) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(90deg,transparent 34%,#000 70%,transparent 100%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 34%,#000 70%,transparent 100%);
+}
+.visual-v2 .hero-copy.visible .hero-kicker{
+  animation:v2FadeUp .8s .05s both var(--ease-expo);
+}
+.visual-v2 .hero-copy.visible h1{
+  animation:v2TitleIn 1.15s .08s both var(--ease-expo);
+}
+.visual-v2 .hero-copy.visible>p{
+  animation:v2FadeUp .9s .22s both var(--ease-expo);
+}
+.visual-v2 .hero-copy.visible .hero-actions{
+  animation:v2FadeUp .9s .32s both var(--ease-expo);
+}
+@keyframes v2TitleIn{
+  from{opacity:0;filter:blur(12px);transform:translateY(52px) scale(.985)}
+  to{opacity:1;filter:blur(0);transform:none}
+}
+@keyframes v2FadeUp{
+  from{opacity:0;transform:translateY(24px)}
+  to{opacity:1;transform:none}
+}
+
+.visual-v2 [data-reveal]{
+  filter:blur(7px);
+  transform:translateY(34px);
+  transition:
+    opacity .9s var(--ease-expo) var(--reveal-delay,0ms),
+    transform .9s var(--ease-expo) var(--reveal-delay,0ms),
+    filter .9s var(--ease-expo) var(--reveal-delay,0ms);
+}
+.visual-v2 [data-reveal].visible{filter:none;transform:none}
+
+.visual-v2 .hero-actions .btn,
+.visual-v2 .btn,
+.visual-v2 .text-link{
+  position:relative;
+  overflow:hidden;
+}
+.visual-v2 .hero-actions .btn::before,
+.visual-v2 .btn::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  transform:translateX(-104%);
+  background:linear-gradient(110deg,transparent 15%,rgba(255,255,255,.18),transparent 85%);
+  transition:transform .7s var(--ease-expo);
+}
+.visual-v2 .hero-actions .btn:hover::before,
+.visual-v2 .btn:hover::before{transform:translateX(104%)}
+.visual-v2 .btn span,.visual-v2 .text-link span{transition:transform .35s var(--ease-expo)}
+.visual-v2 .btn:hover span,.visual-v2 .text-link:hover span{transform:translate(5px,-2px)}
+
+.visual-v2 .quick-grid a{
+  position:relative;
+  overflow:hidden;
+  isolation:isolate;
+  transition:color .35s var(--ease-expo),border-color .35s var(--ease-expo);
+}
+.visual-v2 .quick-grid a::before{
+  content:"";
+  position:absolute;
+  z-index:-1;
+  inset:0;
+  background:linear-gradient(135deg,var(--ocean),#047caf);
+  transform:scaleY(0);
+  transform-origin:bottom;
+  transition:transform .45s var(--ease-expo);
+}
+.visual-v2 .quick-grid a:hover::before{transform:scaleY(1)}
+.visual-v2 .quick-grid a:hover .quick-icon{color:rgba(255,255,255,.72)}
+.visual-v2 .quick-grid a i{transition:transform .35s var(--ease-expo)}
+.visual-v2 .quick-grid a:hover i{transform:translate(4px,-3px)}
+
+.visual-v2 .section-heading h2{text-wrap:balance}
+.visual-v2 .competition-gateway-home{
+  position:relative;
+  overflow:hidden;
+}
+.visual-v2 .competition-gateway-home::after{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:0;
+  height:3px;
+  background:linear-gradient(90deg,var(--fpv-red),var(--fpv-blue));
+  transition:width .8s var(--ease-expo);
+}
+.visual-v2 .competition-gateway-home.visible::after{width:100%}
+
+.visual-v2 .national-photo-card,
+.visual-v2 .discover-card,
+.visual-v2 .news-image,
+.visual-v2 .formation-shell{
+  transform:translateZ(0);
+}
+.visual-v2 .national-photo,
+.visual-v2 .discover-card::after,
+.visual-v2 .news-image{
+  transition:transform .8s var(--ease-expo),filter .55s var(--ease-soft);
+}
+.visual-v2 .national-photo-card:hover .national-photo{transform:scale(1.035)}
+.visual-v2 .discover-card:hover::after{transform:scale(1.045)}
+.visual-v2 .news-image:hover{transform:scale(.992);filter:saturate(1.08) contrast(1.035)}
+
+.visual-v2 .formation-shell{
+  background-position:center;
+  transition:background-position 1.2s var(--ease-expo),transform .7s var(--ease-expo);
+}
+.visual-v2 .formation-shell:hover{background-position:54% 46%}
+
+.visual-v2 a:focus-visible,
+.visual-v2 button:focus-visible,
+.visual-v2 input:focus-visible,
+.visual-v2 select:focus-visible{
+  outline:2px solid var(--fpv-blue);
+  outline-offset:4px;
+}
+
+@media (hover:hover) and (pointer:fine){
+  .visual-v2 .hero{cursor:default}
+}
+@media(max-width:760px){
+  .visual-v2 .site-header.is-scrolled .nav-shell{height:70px}
+  .visual-v2 .hero-overlay{
+    background:
+      linear-gradient(90deg,rgba(2,15,26,.9),rgba(2,15,26,.38)),
+      linear-gradient(0deg,rgba(2,15,26,.9),transparent 55%);
+  }
+  .visual-v2 .hero-overlay::after{background-size:52px 52px;opacity:.10}
+  .visual-v2 [data-reveal]{filter:blur(4px);transform:translateY(22px)}
+}
+@media(prefers-reduced-motion:reduce){
+  .visual-v2 .hero-media{transform:scale(1.01)!important;transition:none!important}
+  .visual-v2 .hero-copy.visible .hero-kicker,
+  .visual-v2 .hero-copy.visible h1,
+  .visual-v2 .hero-copy.visible>p,
+  .visual-v2 .hero-copy.visible .hero-actions{animation:none!important}
+  .visual-v2 [data-reveal]{filter:none!important;transform:none!important}
+  .visual-v2 .v2-scroll-progress{display:none}
+}
