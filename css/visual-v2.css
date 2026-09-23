@@ -1,0 +1,378 @@
+/* FPV Visual V2 — editorial / atlantic direction
+   Isolated overrides for the visual-v2 branch. */
+
+.visual-v2{
+  --navy:#031827;
+  --navy-2:#072b42;
+  --ocean:#00a9df;
+  --sky:#8fd9f1;
+  --red:#df2438;
+  --ink:#071722;
+  --muted:#60717d;
+  --line:#d8e1e6;
+  --paper:#f3f6f7;
+  --radius:8px;
+  --radius-sm:6px;
+  --shadow:0 22px 70px rgba(3,24,39,.12);
+  background:#fff;
+}
+.visual-v2 .prototype-status{display:none}
+
+/* Header: less "app", more national sports institution */
+.visual-v2 .site-header{
+  background:linear-gradient(180deg,rgba(2,17,29,.82),rgba(2,17,29,.18));
+  border-bottom:1px solid rgba(255,255,255,.18);
+}
+.visual-v2 .site-header:after{
+  height:3px;
+  background:linear-gradient(90deg,var(--fpv-gold) 0 6%,var(--fpv-red) 6% 9%,var(--fpv-blue) 9% 15%,transparent 15%);
+}
+.visual-v2 .nav-shell{height:88px}
+.visual-v2 .brand{min-width:235px}
+.visual-v2 .brand-mark-official{width:52px;height:52px;flex-basis:52px}
+.visual-v2 .brand-copy strong{font-size:29px}
+.visual-v2 .desktop-nav{gap:28px}
+.visual-v2 .desktop-nav a{
+  font-size:11px;
+  letter-spacing:.035em;
+  text-transform:uppercase;
+}
+.visual-v2 .myfpv{
+  border-radius:4px;
+  background:#fff;
+  color:var(--navy);
+  border-color:#fff;
+  padding:11px 16px;
+}
+
+/* Hero: cinematic and unmistakably maritime */
+.visual-v2 .hero{
+  min-height:760px;
+  height:min(960px,100svh);
+  background:#02131f;
+}
+.visual-v2 .hero-media{
+  background-image:url("../assets/alto-projeto-olimpico.png");
+  background-size:cover;
+  background-position:center 43%;
+  transform:scale(1.01);
+}
+.visual-v2 .hero-overlay{
+  background:
+    linear-gradient(90deg,rgba(2,15,26,.94) 0%,rgba(2,15,26,.72) 34%,rgba(2,15,26,.18) 68%,rgba(2,15,26,.08) 100%),
+    linear-gradient(0deg,rgba(2,15,26,.82) 0%,transparent 45%);
+}
+.visual-v2 .hero:before{
+  content:"ATLÂNTICO · 38°43′N · 9°08′W";
+  position:absolute;
+  z-index:4;
+  right:28px;
+  top:50%;
+  transform:translateY(-50%) rotate(90deg);
+  transform-origin:center;
+  font-size:9px;
+  letter-spacing:.22em;
+  color:rgba(255,255,255,.68);
+}
+.visual-v2 .hero:after{
+  content:"";
+  position:absolute;
+  z-index:3;
+  right:74px;
+  top:120px;
+  bottom:70px;
+  width:1px;
+  background:linear-gradient(transparent,rgba(255,255,255,.42),transparent);
+}
+.visual-v2 .hero-content{
+  align-items:flex-end;
+  padding-top:120px;
+  padding-bottom:82px;
+}
+.visual-v2 .hero-copy{max-width:860px}
+.visual-v2 .hero-kicker{
+  font-size:10px;
+  letter-spacing:.22em;
+  color:#d7e5ec;
+}
+.visual-v2 .hero-kicker i{width:48px;height:2px}
+.visual-v2 .hero h1{
+  font-size:clamp(72px,10.2vw,152px);
+  line-height:.78;
+  letter-spacing:-.075em;
+  margin:28px 0 34px;
+  max-width:900px;
+}
+.visual-v2 .hero h1 em{
+  color:#fff;
+  font-weight:500;
+  -webkit-text-stroke:1px rgba(255,255,255,.2);
+}
+.visual-v2 .hero-copy>p{
+  max-width:600px;
+  font-size:17px;
+  color:#d0dde4;
+  line-height:1.75;
+}
+.visual-v2 .hero-actions .btn{
+  min-height:52px;
+  border-radius:4px;
+  padding:0 22px;
+}
+.visual-v2 .hero-actions .btn-light{
+  background:var(--red);
+  color:#fff;
+  box-shadow:none;
+}
+.visual-v2 .hero-actions .btn-light:hover{background:#f02c42}
+.visual-v2 .hero-actions .btn-ghost{background:rgba(1,15,25,.28)}
+.visual-v2 .hero-status{
+  width:330px;
+  margin-bottom:10px;
+  padding:24px 0 10px 28px;
+  border-left:1px solid rgba(255,255,255,.28);
+}
+.visual-v2 .hero-status>span{color:#c4d3dc}
+.visual-v2 .wind{border-top:0;margin-top:12px;padding-top:8px}
+.visual-v2 .hero-scroll{left:auto;right:92px;transform:none}
+
+/* Primary access strip: dense, useful, sports-dashboard energy */
+.visual-v2 .quick-links{
+  background:var(--navy);
+  color:#fff;
+  border:0;
+}
+.visual-v2 .quick-grid a{
+  min-height:106px;
+  border-color:rgba(255,255,255,.12);
+  padding:20px 18px;
+}
+.visual-v2 .quick-grid a:first-child{border-left-color:rgba(255,255,255,.12)}
+.visual-v2 .quick-icon{color:#6e93a9}
+.visual-v2 .quick-grid strong{font-size:13px}
+.visual-v2 .quick-grid a:hover{
+  background:var(--ocean);
+  transform:none;
+}
+
+/* Editorial rhythm: fewer soft cards, more scale and lines */
+.visual-v2 .section{padding:132px 0}
+.visual-v2 .section-heading{
+  align-items:start;
+  margin-bottom:62px;
+  padding-bottom:28px;
+  border-bottom:1px solid var(--line);
+}
+.visual-v2 .section-heading h2{
+  font-size:clamp(46px,5.4vw,72px);
+  line-height:.94;
+  letter-spacing:-.055em;
+}
+.visual-v2 .section-heading .eyebrow{color:#6b7f8c}
+.visual-v2 .events-section{background:#fff}
+.visual-v2 .competition-gateway-home{
+  border-radius:0;
+  box-shadow:none;
+  border-top:3px solid var(--navy);
+  border-bottom:1px solid var(--line);
+}
+.visual-v2 .competition-gateway-home h3{
+  font-size:clamp(34px,4vw,56px);
+  max-width:720px;
+  letter-spacing:-.05em;
+}
+.visual-v2 .competition-home-links a{
+  border-radius:0;
+  border-color:var(--line);
+}
+.visual-v2 .competition-home-links a:hover{background:#edf7fb}
+
+/* Alto rendimento: flagship block */
+.visual-v2 .national-section{
+  position:relative;
+  background:#031827;
+  padding:0;
+}
+.visual-v2 .national-section:before{
+  content:"PERFORMANCE / PORTUGAL";
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%) rotate(-90deg);
+  transform-origin:center;
+  font-size:9px;
+  letter-spacing:.22em;
+  color:#6f91a5;
+}
+.visual-v2 .national-shell{
+  min-height:760px;
+  grid-template-columns:.86fr 1.14fr;
+  gap:0;
+}
+.visual-v2 .national-copy{
+  padding:92px 82px 92px 0;
+}
+.visual-v2 .national-copy h2{
+  font-size:clamp(58px,6.5vw,92px);
+}
+.visual-v2 .national-visual{
+  height:760px;
+  border-radius:0;
+  margin-right:calc((100vw - min(calc(100vw - 40px),1240px))/ -2);
+}
+.visual-v2 .national-photo{transform:none}
+.visual-v2 .national-photo-card:hover .national-photo{transform:scale(1.025)}
+.visual-v2 .stat-strip{gap:70px}
+
+/* Discover: photographic magazine grid */
+.visual-v2 .discover-preview{background:#f2f5f6}
+.visual-v2 .discover-grid{
+  grid-template-columns:1.25fr .75fr;
+  grid-template-rows:1fr 1fr;
+  gap:10px;
+}
+.visual-v2 .discover-card{
+  min-height:270px;
+  border-radius:0;
+}
+.visual-v2 .discover-card.big{
+  grid-row:1 / span 2;
+  min-height:550px;
+}
+.visual-v2 .discover-card:hover{transform:none;box-shadow:none}
+.visual-v2 .discover-card strong{font-size:clamp(27px,3vw,42px)}
+.visual-v2 .discover-card.big strong{font-size:clamp(38px,4.4vw,62px)}
+.visual-v2 .discover-card p{font-size:13px}
+
+/* News: editorial, not card-stack */
+.visual-v2 .news-section{background:#fff}
+.visual-v2 .news-grid{
+  grid-template-columns:1.5fr .5fr;
+  gap:54px;
+}
+.visual-v2 .news-image{
+  height:520px;
+  border-radius:0;
+}
+.visual-v2 .news-lead h3{
+  font-size:clamp(30px,3.2vw,46px);
+  max-width:850px;
+}
+.visual-v2 .news-side{border-top:3px solid var(--navy)}
+.visual-v2 .news-card{padding:30px 0}
+.visual-v2 .news-card h4{font-size:22px}
+
+/* Formation: strong national-program feel */
+.visual-v2 .formation-section{padding-top:50px}
+.visual-v2 .formation-shell{
+  border-radius:0;
+  padding:80px 76px;
+  background:
+    linear-gradient(105deg,rgba(3,24,39,.98),rgba(4,62,91,.94)),
+    url("../assets/descobrir-quero-experimentar.png") center/cover;
+  border-left:6px solid var(--red);
+}
+.visual-v2 .formation-shell h2{font-size:clamp(46px,5vw,68px)}
+.visual-v2 .formation-actions a{font-size:20px}
+
+/* Clubs / territory */
+.visual-v2 .club-preview{padding-top:70px}
+.visual-v2 .club-shell{
+  min-height:650px;
+  border-radius:0;
+  border:0;
+  background:#f2f5f6;
+}
+.visual-v2 .club-copy{padding:74px}
+.visual-v2 .club-copy h2{font-size:clamp(52px,5.7vw,78px)}
+.visual-v2 .club-preview .map-art{background:#05385e}
+.visual-v2 .club-copy .btn{border-radius:4px}
+
+/* Footer */
+.visual-v2 .site-footer{margin-top:0;background:#02131f}
+.visual-v2 .footer-top{padding-top:84px}
+.visual-v2 .footer-bottom{padding-bottom:36px}
+
+/* Micro-interactions */
+@media (hover:hover) and (pointer:fine){
+  .visual-v2 .quick-grid a:hover{transform:none}
+  .visual-v2 .discover-card:hover{transform:none}
+  .visual-v2 .discover-card:hover::after{transform:scale(1.025)}
+  .visual-v2 .news-image{transition:filter .35s,transform .35s}
+  .visual-v2 .news-image:hover{filter:saturate(1.08) contrast(1.03)}
+}
+
+/* Tablet */
+@media(max-width:1080px){
+  .visual-v2 .desktop-nav{gap:16px}
+  .visual-v2 .desktop-nav a{font-size:10px}
+  .visual-v2 .hero-status{display:none}
+  .visual-v2 .hero-copy{max-width:780px}
+  .visual-v2 .national-shell{grid-template-columns:1fr}
+  .visual-v2 .national-copy{padding:80px 0}
+  .visual-v2 .national-visual{
+    margin:0;
+    height:600px;
+  }
+}
+
+/* Mobile */
+@media(max-width:760px){
+  .visual-v2 .nav-shell{height:76px}
+  .visual-v2 .hero{
+    min-height:720px;
+    height:92svh;
+  }
+  .visual-v2 .hero-media{background-position:58% center}
+  .visual-v2 .hero:before,.visual-v2 .hero:after{display:none}
+  .visual-v2 .hero-content{
+    align-items:flex-end;
+    padding-top:100px;
+    padding-bottom:64px;
+  }
+  .visual-v2 .hero h1{
+    font-size:clamp(58px,19vw,88px);
+    line-height:.82;
+    margin:22px 0 25px;
+  }
+  .visual-v2 .hero-copy>p{font-size:14px}
+  .visual-v2 .hero-actions{gap:8px}
+  .visual-v2 .hero-actions .btn{
+    width:100%;
+    min-height:50px;
+  }
+  .visual-v2 .hero-scroll{display:none}
+  .visual-v2 .quick-grid{grid-template-columns:repeat(2,1fr)}
+  .visual-v2 .quick-grid a{min-height:90px}
+  .visual-v2 .section{padding:84px 0}
+  .visual-v2 .section-heading{
+    margin-bottom:38px;
+    padding-bottom:20px;
+  }
+  .visual-v2 .discover-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    grid-template-rows:auto;
+  }
+  .visual-v2 .discover-card.big{
+    grid-row:auto;
+    min-height:430px;
+  }
+  .visual-v2 .discover-card{min-height:320px}
+  .visual-v2 .news-grid{grid-template-columns:1fr;gap:36px}
+  .visual-v2 .news-image{height:360px}
+  .visual-v2 .formation-shell{
+    padding:44px 24px;
+    border-left:4px solid var(--red);
+  }
+  .visual-v2 .club-shell{min-height:unset}
+  .visual-v2 .club-copy{padding:44px 24px}
+  .visual-v2 .national-visual{height:500px}
+}
+
+@media(max-width:420px){
+  .visual-v2 .quick-grid{grid-template-columns:1fr 1fr}
+  .visual-v2 .quick-grid a{padding:16px 12px}
+  .visual-v2 .quick-grid strong{font-size:12px}
+  .visual-v2 .hero h1{font-size:58px}
+}
