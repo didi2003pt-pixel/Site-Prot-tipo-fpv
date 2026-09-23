@@ -1,0 +1,123 @@
+/* FPV — Atlantic editorial system. Existing content and routes preserved. */
+.fpv-modern{--navy:#072b40;--ink:#102f40;--ocean:#126481;--red:#d6223b;--muted:#526a77;--line:#dce4e8;--paper:#f2f6f8;--radius:10px;--max:1320px;color:var(--ink);font-size:16px;background:#fff}
+.fpv-modern .container{width:min(calc(100% - 80px),var(--max))}
+.fpv-modern h1,.fpv-modern h2,.fpv-modern h3{letter-spacing:-.045em;line-height:1.06}
+.fpv-modern p{font-size:16px;line-height:1.75}
+.fpv-modern .site-header{position:sticky;top:0;background:#072b40;color:white;border-bottom:1px solid #ffffff24;backdrop-filter:blur(16px);z-index:50;transition:box-shadow .2s}
+.fpv-modern.home .site-header{background:#fffffff5;color:var(--navy);border-bottom:1px solid var(--line)}
+.fpv-modern .site-header:after{display:none}
+.fpv-modern .site-header.is-scrolled{box-shadow:0 4px 24px #072b4010}
+.fpv-modern .nav-shell{height:90px;gap:20px}
+.fpv-modern .brand{min-width:210px;gap:12px}
+.fpv-modern .brand-mark-official{width:48px;height:48px;flex-basis:48px}
+.fpv-modern .brand-copy strong{font-size:30px}
+.fpv-modern .brand-copy span{font-size:9px;opacity:1;letter-spacing:.06em}
+.fpv-modern .brand-copy span:before{background:currentColor;opacity:.25}
+.fpv-modern .desktop-nav{gap:20px}
+.fpv-modern .desktop-nav a{font-size:14px;white-space:nowrap;padding:30px 0;letter-spacing:-.02em}
+.fpv-modern .desktop-nav a:after{background:var(--red);bottom:22px;height:2px}
+.fpv-modern .myfpv{border-radius:6px;background:var(--red);border-color:var(--red);color:white;font-size:14px;padding:12px 16px}
+.fpv-modern .icon-btn{width:44px;height:44px;color:inherit}
+.fpv-modern.home .menu-btn span{background:var(--navy)}
+.fpv-modern .menu-btn{min-width:44px;min-height:44px}
+.fpv-modern .mobile-menu{inset:90px 0 0;height:calc(100dvh - 90px);overflow:auto}
+.fpv-modern .mobile-menu.active{display:block}
+.fpv-modern .mobile-menu a{font-size:24px;min-height:56px}
+.fpv-modern .btn{font-size:14px;text-transform:none;letter-spacing:0;border-radius:6px;min-height:52px;padding:0 23px}
+.fpv-modern .btn span{font-size:20px;transition:transform .2s}
+.fpv-modern .btn:hover span{transform:translate(3px,-2px)}
+.fpv-modern .btn-dark:hover{background:#164c65}
+.fpv-modern .text-link{font-size:14px;text-transform:none;letter-spacing:0}
+.fpv-modern .eyebrow{font-size:12px;letter-spacing:.16em;color:var(--ocean)}
+.fpv-modern .eyebrow-light{color:#9ed5e6}
+.fpv-modern .tag,.fpv-modern .news-meta time{font-size:12px}
+.fpv-modern .section{padding:88px 0}
+.fpv-modern .section-heading{margin-bottom:36px;align-items:end;gap:28px}
+.fpv-modern .section-heading h2{font-size:clamp(36px,4.2vw,56px);line-height:1.06;white-space:pre-line}
+.fpv-modern .section-heading .heading-copy{font-size:16px;max-width:380px}
+.fpv-modern [data-reveal]{opacity:1;transform:none;filter:none}
+.fpv-modern .page-hero{padding:76px 0 70px}
+.fpv-modern .page-hero h1{line-height:1.04;font-size:clamp(48px,7vw,96px)}
+.fpv-modern .hero{height:auto;min-height:0;background:#f6f8f9;color:var(--ink);overflow:hidden}
+.fpv-modern .hero-layout{display:grid;grid-template-columns:1fr 1fr;gap:50px;min-height:620px;align-items:center;padding-block:38px}
+.fpv-modern .hero-copy{max-width:none;padding:30px 0 0}
+.fpv-modern .hero-kicker{font-size:12px;color:var(--ocean);letter-spacing:.12em}
+.fpv-modern .hero-kicker i{width:26px;height:2px;background:var(--red)}
+.fpv-modern .hero h1{font-size:clamp(62px,6.6vw,98px);line-height:1.02;letter-spacing:-.065em;margin:32px 0 25px;font-weight:600}
+.fpv-modern .hero h1 em{color:var(--ocean);font-weight:500;font-style:normal;white-space:nowrap}
+.fpv-modern .hero-copy>p{font-size:17px;color:var(--muted);line-height:1.65;margin-bottom:30px}
+.fpv-modern .hero-actions{display:flex;flex-direction:row;align-items:center;gap:22px}
+.fpv-modern .hero-calendar{display:inline-flex;align-items:center;gap:18px;min-height:48px;font-size:14px;font-weight:700;border-bottom:1px solid #9aafb8}
+.fpv-modern .hero-calendar:hover{color:var(--red)}
+.fpv-modern .hero-footnote{display:flex;align-items:center;justify-content:space-between;border-top:1px solid #ccd9df;margin-top:54px;padding-top:20px;color:var(--muted);font-size:12px;letter-spacing:.04em}
+.fpv-modern .hero-footnote a{min-height:32px;display:flex;gap:12px;align-items:center}
+.fpv-modern .hero-picture{position:relative;height:560px;border-radius:5px 5px 68px 5px;overflow:hidden;background:#286389}
+.fpv-modern .hero-picture>img{width:100%;height:100%;object-fit:cover;object-position:43% center;display:block;transition:transform .7s cubic-bezier(.2,.7,.3,1)}
+.fpv-modern .hero-picture:hover>img{transform:scale(1.025)}
+.fpv-modern .hero-picture:after{content:'';position:absolute;inset:45% 0 0;background:linear-gradient(transparent,#032636dc);pointer-events:none}
+.fpv-modern .hero-picture-caption{position:absolute;bottom:34px;left:30px;right:38px;z-index:1;color:white;display:flex;flex-direction:column;gap:12px}
+.fpv-modern .hero-picture-caption>span{font-size:12px;letter-spacing:.06em}
+.fpv-modern .hero-picture-caption a{font-family:'Space Grotesk',sans-serif;font-size:27px;line-height:1.2;display:flex;justify-content:space-between;gap:20px}
+.fpv-modern .quick-links{background:white;border-bottom:1px solid var(--line);border-top:1px solid var(--line)}
+.fpv-modern .quick-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+.fpv-modern .quick-grid a{min-height:98px;padding:20px 16px;gap:10px;border-color:var(--line);transition:background .2s,color .2s}
+.fpv-modern .quick-grid strong{font-size:14px}
+.fpv-modern .quick-grid .quick-icon{font-size:12px;color:#627d8a}
+.fpv-modern .quick-grid a:hover{transform:none;background:var(--navy);color:white}
+.fpv-modern .quick-grid a:hover .quick-icon{color:#abd4e3}
+.fpv-modern .quick-grid i{font-size:18px}
+.fpv-modern .competition-gateway-home{padding:36px;border:1px solid var(--line);background:#f5f8fa;box-shadow:none;border-radius:8px;gap:42px}
+.fpv-modern .competition-gateway-home h3{font-size:32px;max-width:470px}
+.fpv-modern .competition-gateway-home p{max-width:500px}
+.fpv-modern .competition-home-links a{background:white;border-radius:4px;padding:20px;font-size:14px}
+.fpv-modern .competition-home-links a strong{font-size:16px}
+.fpv-modern .national-section{background:var(--navy);padding:0}
+.fpv-modern .national-shell{grid-template-columns:.9fr 1.1fr;gap:56px;min-height:610px}
+.fpv-modern .national-copy{padding:64px 0}
+.fpv-modern .national-copy h2{font-size:clamp(48px,5.5vw,76px);line-height:1.03}
+.fpv-modern .national-copy p{font-size:16px;max-width:440px}
+.fpv-modern .national-visual{height:500px;border-radius:5px;min-width:0}
+.fpv-modern .national-photo-meta strong{font-size:25px;line-height:1.2}
+.fpv-modern .national-photo-meta a{font-size:14px}
+.fpv-modern .stat-strip{gap:40px}
+.fpv-modern .stat-strip span{font-size:12px;line-height:1.5}
+.fpv-modern .discover-preview{background:white}
+.fpv-modern .discover-grid{grid-template-columns:1.25fr 1fr 1fr;gap:18px}
+.fpv-modern .discover-card,.fpv-modern .discover-card.big{grid-column:auto;min-height:400px;border-radius:6px;padding:26px}
+.fpv-modern .discover-card strong,.fpv-modern .discover-card.big strong{font-size:30px;line-height:1.1}
+.fpv-modern .discover-card p{font-size:14px;line-height:1.6}
+.fpv-modern .discover-card:before{background:linear-gradient(0deg,#031c2ef2,transparent 90%)}
+.fpv-modern .discover-card:hover{transform:translateY(-4px);box-shadow:0 12px 24px #072b4012}
+.fpv-modern .news-section{background:#f2f6f8}
+.fpv-modern .news-grid{grid-template-columns:1.2fr 1fr;gap:48px}
+.fpv-modern .news-image{height:350px;border-radius:6px;background-color:#dbe5ea}
+.fpv-modern .news-lead h3{font-size:32px;line-height:1.17}
+.fpv-modern .news-side{display:block;border-top:2px solid var(--navy)}
+.fpv-modern .news-card{border:0;border-bottom:1px solid #cbd9e0;border-radius:0;padding:20px 0;background:transparent}
+.fpv-modern .news-card h4{font-size:23px;line-height:1.25;margin:12px 0}
+.fpv-modern .news-meta{margin:10px 0}
+.fpv-modern .formation-section{padding-bottom:0}
+.fpv-modern .formation-shell{background:var(--navy);border-radius:8px;padding:52px;gap:54px;border-top:4px solid var(--red)}
+.fpv-modern .formation-shell h2{font-size:clamp(36px,4.2vw,54px);line-height:1.1}
+.fpv-modern .formation-actions a{font-size:18px;padding:22px 0}
+.fpv-modern .club-shell{background:#f2f6f8;border:1px solid var(--line);border-radius:8px;min-height:500px}
+.fpv-modern .club-copy{padding:52px}
+.fpv-modern .club-copy h2{font-size:clamp(38px,4.2vw,54px);line-height:1.1;white-space:pre-line}
+.fpv-modern .club-preview .map-art{background:#064064}
+.fpv-modern .site-footer{background:#062333;margin:0}
+.fpv-modern .footer-grid a,.fpv-modern .footer-grid strong{font-size:14px}
+.fpv-modern .footer-bottom{font-size:12px;gap:20px;flex-wrap:wrap}
+.fpv-modern .preview-note{color:#b6cbd4}
+.fpv-modern .search-panel{border-radius:12px}
+.fpv-modern .search-hint,.fpv-modern .search-suggestions a,.fpv-modern .search-suggestions button{font-size:14px}
+.fpv-modern :is(a,button,input,select):focus-visible{outline:3px solid #1e8dab;outline-offset:4px}
+.skip-link{position:fixed;top:10px;left:20px;transform:translateY(-180%);z-index:200;background:white;color:#072b40;padding:14px 20px;border:2px solid #072b40}
+.skip-link:focus{transform:none}
+@media(min-width:761px) and (max-width:1200px){.fpv-modern .desktop-nav{display:none}.fpv-modern .menu-btn{display:block}.fpv-modern .nav-actions{margin-left:auto}}
+@media(max-width:1050px){.fpv-modern .container{width:calc(100% - 48px)}.fpv-modern .hero-layout{gap:24px;min-height:570px}.fpv-modern .hero h1{font-size:66px}.fpv-modern .hero-picture{height:510px}.fpv-modern .hero-actions{gap:12px}.fpv-modern .hero-calendar{font-size:13px}.fpv-modern .hero-footnote{margin-top:32px}.fpv-modern .quick-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.fpv-modern .national-shell{gap:28px}.fpv-modern .discover-grid{gap:12px}.fpv-modern .discover-card,.fpv-modern .discover-card.big{padding:20px;min-height:370px}.fpv-modern .discover-card strong{font-size:26px}}
+@media(max-width:760px){.fpv-modern .container{width:calc(100% - 36px)}.fpv-modern .nav-shell{height:76px;gap:12px}.fpv-modern .brand{min-width:0;gap:10px}.fpv-modern .brand-mark-official{width:42px;height:42px;flex-basis:42px}.fpv-modern .brand-copy strong{font-size:28px}.fpv-modern .nav-actions{margin-left:auto;gap:8px}.fpv-modern .mobile-menu{inset:76px 0 0;height:calc(100dvh - 76px)}.fpv-modern .hero-layout{display:flex;flex-direction:column;align-items:stretch;padding-block:26px;gap:30px;min-height:0}.fpv-modern .hero-copy{padding:8px 0 0}.fpv-modern .hero-kicker{font-size:10px;letter-spacing:.08em}.fpv-modern .hero h1{font-size:clamp(48px,12.8vw,76px);line-height:1.04;margin:24px 0 18px;letter-spacing:-.055em}.fpv-modern .hero-copy>p{font-size:16px;margin-bottom:24px}.fpv-modern .hero-actions{gap:14px;align-items:stretch;flex-wrap:wrap}.fpv-modern .hero-actions .btn{width:auto}.fpv-modern .hero-calendar{font-size:14px}.fpv-modern .hero-footnote{display:none}.fpv-modern .hero-picture{height:320px;border-radius:5px 5px 42px 5px}.fpv-modern .hero-picture>img{object-position:center 43%}.fpv-modern .hero-picture-caption{left:22px;bottom:24px;right:26px}.fpv-modern .hero-picture-caption a{font-size:24px}.fpv-modern .quick-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fpv-modern .quick-grid a{padding:16px 12px;min-height:76px}.fpv-modern .section{padding:58px 0}.fpv-modern .section-heading{gap:20px;align-items:start}.fpv-modern .section-heading h2{font-size:36px}.fpv-modern .competition-gateway-home{padding:24px;gap:24px;grid-template-columns:1fr}.fpv-modern .competition-gateway-home h3{font-size:28px}.fpv-modern .national-section{padding:0}.fpv-modern .national-shell{grid-template-columns:1fr;gap:0;padding-bottom:32px}.fpv-modern .national-copy{padding:50px 0 34px}.fpv-modern .national-copy h2{font-size:50px}.fpv-modern .national-visual{height:390px}.fpv-modern .national-photo-meta strong{font-size:22px}.fpv-modern .discover-grid{grid-template-columns:1fr}.fpv-modern .discover-card,.fpv-modern .discover-card.big{min-height:330px;padding:26px}.fpv-modern .discover-card strong,.fpv-modern .discover-card.big strong{font-size:30px}.fpv-modern .news-grid{grid-template-columns:1fr;gap:30px}.fpv-modern .news-image{height:270px}.fpv-modern .news-lead h3{font-size:28px}.fpv-modern .formation-section{padding-bottom:0}.fpv-modern .formation-shell{padding:32px 24px;gap:25px;grid-template-columns:1fr}.fpv-modern .club-shell{grid-template-columns:1fr}.fpv-modern .club-copy{padding:32px 24px}.fpv-modern .club-copy h2{font-size:36px}.fpv-modern .footer-top{padding-top:50px}.fpv-modern .footer-grid{gap:24px}.fpv-modern .footer-bottom{align-items:flex-start}.fpv-modern .page-hero{padding:52px 0}.fpv-modern .page-hero h1{font-size:clamp(40px,11vw,66px)}}
+@media(prefers-reduced-motion:no-preference){.fpv-modern .hero-copy{animation:fpv-enter .55s ease-out both}.fpv-modern .hero-picture{animation:fpv-enter .65s ease-out both}.fpv-modern .motion-enter{animation:fpv-enter .55s ease-out both}@keyframes fpv-enter{from{opacity:.65;transform:translateY(14px)}to{opacity:1;transform:none}}}
+@media(prefers-reduced-motion:reduce){.fpv-modern *, .fpv-modern *:before,.fpv-modern *:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+body.fpv-modern:not(.home) .site-header{position:sticky;background:#072b40}
+.fpv-modern .hero-layout>*{min-width:0}
+.fpv-modern .hero h1{overflow-wrap:normal}

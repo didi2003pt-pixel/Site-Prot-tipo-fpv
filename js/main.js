@@ -37,11 +37,22 @@
     if (e.key === 'Escape') closeSearch();
   });
   const showDemoResult = value => {
-    if (!searchResult || !searchResultTitle) return;
+    if (!searchResult) return;
     const cleaned = (value || '').trim();
     searchResult.hidden = cleaned.length < 2;
-    searchResultTitle.textContent = cleaned ? `Resultados para “${cleaned}”` : '';
+    searchResult.replaceChildren();
+    if (cleaned.length < 2) return;
+    const link = document.createElement('a');
+    link.className = 'btn btn-dark';
+    link.href = `pesquisa.html?q=${encodeURIComponent(cleaned)}`;
+    link.textContent = `Pesquisar “${cleaned}” →`;
+    searchResult.append(link);
   };
+  searchInput?.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && searchInput.value.trim().length >= 2) {
+      location.href = `pesquisa.html?q=${encodeURIComponent(searchInput.value.trim())}`;
+    }
+  });
   searchInput?.addEventListener('input', e => showDemoResult(e.target.value));
   document.querySelectorAll('[data-suggestion]').forEach(btn => btn.addEventListener('click', () => {
     if (searchInput) searchInput.value = btn.dataset.suggestion;

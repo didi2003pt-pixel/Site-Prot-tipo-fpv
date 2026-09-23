@@ -9,8 +9,10 @@
 <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
+<link href="css/modern.css" rel="stylesheet"/>
 </head>
-<body class="competition-page">
+<body class="competition-page fpv-modern">
+<a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 <header class="site-header" id="top">
   <div class="container nav-shell">
     <a aria-label="Federação Portuguesa de Vela — Início" class="brand" href="index.html">
@@ -31,12 +33,12 @@
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.6-4.6m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path></svg>
       </button>
       <a class="myfpv" href="myfpv.html">myFPV <span>↗</span></a>
-      <button aria-expanded="false" aria-label="Abrir menu" class="menu-btn" data-menu-toggle type="button">
+      <button aria-expanded="false" aria-label="Abrir menu" class="menu-btn" aria-controls="mobile-navigation" data-menu-toggle type="button">
         <span></span><span></span><span></span>
       </button>
     </div>
   </div>
-  <div class="mobile-menu" data-mobile-menu>
+  <div class="mobile-menu" id="mobile-navigation" data-mobile-menu>
     <div class="mobile-menu-inner container">
       <a href="descobrir.html"><span>01</span> Descobrir</a>
       <a href="competicao.html"><span>02</span> Competição</a>
@@ -49,7 +51,7 @@
     </div>
   </div>
 </header>
-<main>
+<main id="conteudo">
 
 <section class="page-hero gateway-hero gateway-competition">
   <div class="container">
@@ -147,5 +149,6 @@
   </section>
 </div>
 <script src="js/main.js"></script>
+<script src="js/modern.js" defer></script>
 </body>
 </html>
