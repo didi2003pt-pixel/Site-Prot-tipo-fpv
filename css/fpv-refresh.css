@@ -355,3 +355,208 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
   .hero-visual img{transition:none}
   [data-reveal]{transition:none}
 }
+
+/* =========================================================
+   Compatibility layer for the validated fpv-modern shell.
+   Uses stronger selectors because modern.css loads afterwards.
+   ========================================================= */
+body.home.fpv-modern{
+  background:var(--fpv-mist);
+}
+body.home.fpv-modern .site-header{
+  background:rgba(237,243,245,.96);
+  color:var(--fpv-ink);
+  border-bottom:1px solid rgba(8,33,51,.14);
+  box-shadow:0 8px 28px rgba(3,24,39,.05);
+}
+body.home.fpv-modern .site-header:after{
+  display:block;
+  height:3px;
+  background:linear-gradient(90deg,var(--fpv-gold) 0 4%,var(--fpv-red) 4% 6.5%,var(--fpv-blue) 6.5% 9.5%,transparent 9.5%);
+}
+body.home.fpv-modern .hero{
+  background:
+    linear-gradient(rgba(5,52,76,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(5,52,76,.045) 1px,transparent 1px),
+    #e2eaee;
+  background-size:64px 64px;
+  color:var(--fpv-ink);
+  border-bottom:1px solid #cbd7dd;
+}
+body.home.fpv-modern .hero-layout{
+  min-height:610px;
+  padding-block:32px;
+}
+body.home.fpv-modern .hero-copy{
+  padding-top:22px;
+}
+body.home.fpv-modern .hero h1{
+  color:var(--fpv-ink);
+}
+body.home.fpv-modern .hero h1 em{
+  color:var(--fpv-ocean);
+}
+body.home.fpv-modern .hero-copy>p{
+  color:#5c7381;
+}
+body.home.fpv-modern .hero-picture{
+  box-shadow:0 28px 62px rgba(3,24,39,.14);
+}
+body.home.fpv-modern .hero-footnote{
+  border-color:#b8c8d0;
+  color:#607884;
+}
+body.home.fpv-modern .quick-links{
+  background:var(--fpv-deep);
+  color:#fff;
+  border:0;
+}
+body.home.fpv-modern .quick-grid a{
+  background:transparent;
+  color:#fff;
+  border-color:rgba(255,255,255,.13);
+}
+body.home.fpv-modern .quick-grid .quick-icon{
+  color:#79a0b3;
+}
+body.home.fpv-modern .quick-grid i{
+  color:#c3d9e2;
+}
+body.home.fpv-modern .quick-grid a:hover{
+  background:var(--fpv-ocean);
+  color:#fff;
+}
+body.home.fpv-modern .events-section{
+  background:#d9e5ea;
+}
+body.home.fpv-modern .competition-gateway-home{
+  padding:0;
+  gap:0;
+  grid-template-columns:1.12fr .88fr;
+  background:var(--fpv-deep);
+  color:#fff;
+  border:0;
+  box-shadow:0 22px 60px rgba(3,24,39,.12);
+  overflow:hidden;
+}
+body.home.fpv-modern .competition-gateway-home>div:first-child{
+  padding:50px 52px;
+}
+body.home.fpv-modern .competition-gateway-home h3{
+  color:#fff;
+  max-width:560px;
+}
+body.home.fpv-modern .competition-gateway-home p{
+  color:#bdd0da;
+}
+body.home.fpv-modern .competition-gateway-home .tag{
+  color:#d3e2e9;
+  border-color:rgba(255,255,255,.22);
+  background:rgba(255,255,255,.04);
+}
+body.home.fpv-modern .competition-gateway-home .btn-dark{
+  background:#fff;
+  color:var(--fpv-deep);
+}
+body.home.fpv-modern .competition-home-links{
+  padding:18px 30px;
+  background:#082d45;
+  border:0;
+}
+body.home.fpv-modern .competition-home-links a{
+  background:transparent;
+  color:#fff;
+  border-radius:0;
+  border-color:rgba(255,255,255,.14);
+  padding:22px 0;
+}
+body.home.fpv-modern .competition-home-links span,
+body.home.fpv-modern .competition-home-links i{
+  color:var(--fpv-sky);
+}
+body.home.fpv-modern .discover-preview{
+  background:#dfe9ed;
+}
+body.home.fpv-modern .discover-card{
+  background:#edf2f4;
+  border-radius:5px;
+}
+body.home.fpv-modern .discover-card.big{
+  background:linear-gradient(145deg,#cfe3eb,#e7f0f3);
+}
+body.home.fpv-modern .discover-card:nth-child(2){
+  background:#f0ede6;
+}
+body.home.fpv-modern .discover-card:nth-child(3){
+  background:#d3e3e8;
+}
+body.home.fpv-modern .news-section{
+  background:#f2efe9;
+}
+body.home.fpv-modern .formation-section{
+  background:#d7e4e9;
+}
+body.home.fpv-modern .formation-shell{
+  border-radius:5px;
+  border-left:5px solid var(--fpv-red);
+}
+body.home.fpv-modern .club-preview{
+  background:#e3ebee;
+}
+body.home.fpv-modern .club-shell{
+  border:0;
+  box-shadow:0 20px 55px rgba(3,24,39,.08);
+}
+body.home.fpv-modern .club-copy{
+  background:#eef2f2;
+}
+body.home.fpv-modern .map-art{
+  background:#0a3a57;
+}
+body.fpv-modern:not(.home){
+  background:#e7edf0;
+}
+body.fpv-modern:not(.home) .page-hero{
+  background:linear-gradient(120deg,#031827,#0a4865)!important;
+}
+body.fpv-modern:not(.home) .section-paper,
+body.fpv-modern:not(.home) .real-clubs-page{
+  background:#dfe8ec!important;
+}
+body.fpv-modern:not(.home) main>.section:not(.section-dark):not(.section-paper):not(.real-clubs-page){
+  background:#f1f3f2;
+}
+body.fpv-modern:not(.home) .institution-card,
+body.fpv-modern:not(.home) .journey-card,
+body.fpv-modern:not(.home) .story-card,
+body.fpv-modern:not(.home) .real-club-card,
+body.fpv-modern:not(.home) .course-preview-card,
+body.fpv-modern:not(.home) .performance-card{
+  border-radius:6px;
+}
+body.fpv-modern .section{
+  padding-top:94px;
+  padding-bottom:94px;
+}
+@media(max-width:760px){
+  body.home.fpv-modern .hero{
+    background-size:48px 48px;
+  }
+  body.home.fpv-modern .hero-layout{
+    min-height:auto;
+    padding-block:30px 42px;
+  }
+  body.home.fpv-modern .competition-gateway-home{
+    grid-template-columns:1fr;
+  }
+  body.home.fpv-modern .competition-gateway-home>div:first-child{
+    padding:34px 26px;
+  }
+  body.home.fpv-modern .competition-home-links{
+    padding:10px 26px 20px;
+  }
+  body.fpv-modern .section{
+    padding-top:66px;
+    padding-bottom:66px;
+  }
+}
