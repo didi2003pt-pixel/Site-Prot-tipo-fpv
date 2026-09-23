@@ -1,0 +1,357 @@
+/* =========================================================
+   FPV Refresh V3 — Atlântico editorial / validação interna
+   Layered over the validated package. Original assets remain intact.
+   ========================================================= */
+
+:root{
+  --fpv-deep:#031827;
+  --fpv-deep-2:#06283d;
+  --fpv-ocean:#087fa9;
+  --fpv-sky:#78cbe6;
+  --fpv-mist:#e7eef2;
+  --fpv-mist-2:#dce7ec;
+  --fpv-paper:#f4f6f6;
+  --fpv-warm:#f3f1ec;
+  --fpv-red:#d7273f;
+  --fpv-line:#cbd8df;
+  --fpv-ink:#082133;
+  --fpv-muted:#617785;
+  --fpv-ease:cubic-bezier(.16,1,.3,1);
+}
+
+html{background:var(--fpv-deep)}
+body{background:var(--fpv-mist);color:var(--fpv-ink)}
+.section{padding:96px 0}
+.section-heading{margin-bottom:44px}
+.section-heading h2{text-wrap:balance}
+
+.home .site-header{
+  position:sticky;
+  top:0;
+  background:rgba(247,249,249,.94);
+  color:var(--fpv-ink);
+  border-bottom:1px solid rgba(8,33,51,.12);
+  backdrop-filter:blur(18px) saturate(1.1);
+  -webkit-backdrop-filter:blur(18px) saturate(1.1);
+  box-shadow:0 10px 36px rgba(3,24,39,.04);
+}
+.home .site-header:after{
+  height:3px;
+  background:linear-gradient(90deg,var(--fpv-gold) 0 4%,var(--fpv-red) 4% 6.5%,var(--fpv-blue) 6.5% 9.5%,transparent 9.5%);
+}
+.home .nav-shell{height:86px}
+.home .brand-mark-official{filter:none}
+.home .brand-copy strong{color:var(--fpv-ink)}
+.home .brand-copy span{color:#385064;opacity:1}
+.home .brand-copy span:before{background:rgba(8,33,51,.2)}
+.home .desktop-nav a{color:var(--fpv-ink)}
+.home .desktop-nav a:after{background:var(--fpv-ocean)}
+.home .icon-btn,.home .menu-btn{color:var(--fpv-ink)}
+.home .myfpv{
+  border-radius:6px;
+  border-color:var(--fpv-red);
+  background:var(--fpv-red);
+  color:#fff;
+  padding:12px 18px;
+}
+
+.home-hero{
+  position:relative;
+  min-height:650px;
+  overflow:hidden;
+  background:
+    linear-gradient(rgba(5,52,76,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(5,52,76,.045) 1px,transparent 1px),
+    var(--fpv-mist);
+  background-size:64px 64px;
+  color:var(--fpv-ink);
+}
+.home-hero:before{
+  content:"ATLÂNTICO · PORTUGAL";
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%) rotate(-90deg);
+  transform-origin:left top;
+  font-size:8px;
+  letter-spacing:.24em;
+  color:#6c8592;
+}
+.home-hero .hero-content{
+  min-height:650px;
+  height:auto;
+  padding:38px 0 36px;
+  display:grid;
+  grid-template-columns:minmax(0,.98fr) minmax(480px,1.02fr);
+  gap:54px;
+  align-items:stretch;
+}
+.home-hero .hero-copy{
+  max-width:none;
+  padding:48px 0 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-start;
+}
+.home-hero .hero-kicker{
+  color:#23617a;
+  font-size:10px;
+  letter-spacing:.18em;
+}
+.home-hero .hero-kicker i{width:28px;height:2px;background:var(--fpv-red)}
+.home-hero h1{
+  margin:40px 0 28px;
+  color:var(--fpv-ink);
+  font-size:clamp(68px,7.2vw,110px);
+  line-height:.84;
+  letter-spacing:-.07em;
+  max-width:660px;
+}
+.home-hero h1 em{
+  color:var(--fpv-ocean);
+  font-weight:500;
+  -webkit-text-stroke:0;
+}
+.home-hero .hero-copy>p{
+  max-width:550px;
+  margin:0 0 28px;
+  color:#607886;
+  font-size:17px;
+  line-height:1.75;
+}
+.home-hero .hero-actions{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.home-hero .btn{border-radius:5px;min-height:52px;padding:0 23px}
+.home-hero .btn-light{background:var(--fpv-deep);color:#fff;box-shadow:none}
+.home-hero .btn-light:hover{background:var(--fpv-ocean)}
+.home-hero .btn-ghost{
+  background:transparent;
+  color:var(--fpv-ink);
+  border:0;
+  border-bottom:1px solid #9cadb6;
+  border-radius:0;
+  padding-inline:0;
+  min-width:174px;
+  justify-content:space-between;
+}
+.hero-indexline{
+  width:100%;
+  margin-top:auto;
+  padding-top:28px;
+  border-top:1px solid var(--fpv-line);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  color:#718590;
+  font-size:10px;
+}
+.hero-indexline strong{font-weight:500;color:#4f6775}
+
+.hero-visual{
+  min-height:560px;
+  position:relative;
+  overflow:hidden;
+  border-radius:3px 3px 58px 3px;
+  background:var(--fpv-deep);
+  box-shadow:0 26px 60px rgba(3,24,39,.12);
+}
+.hero-visual img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center;
+  transition:transform .8s var(--fpv-ease);
+}
+.hero-visual:hover img{transform:scale(1.025)}
+.hero-visual:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(180deg,transparent 48%,rgba(3,24,39,.16) 62%,rgba(3,24,39,.9) 100%);
+}
+.hero-visual-meta{
+  position:absolute;
+  z-index:2;
+  left:30px;
+  right:30px;
+  bottom:26px;
+  color:#fff;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:6px 20px;
+  align-items:end;
+}
+.hero-visual-meta span{font-size:10px;color:#c7d9e2}
+.hero-visual-meta strong{font:600 clamp(25px,2.5vw,36px)/1.05 "Space Grotesk";letter-spacing:-.035em}
+.hero-visual-meta i{grid-row:1/span 2;grid-column:2;font-style:normal;font-size:24px;align-self:end}
+
+.quick-links{background:var(--fpv-deep);color:#fff;border:0}
+.quick-grid a{
+  min-height:96px;
+  border-color:rgba(255,255,255,.12)!important;
+  background:transparent;
+  transition:background .35s var(--fpv-ease),color .35s var(--fpv-ease);
+}
+.quick-grid a:hover{background:var(--fpv-ocean);color:#fff;transform:none}
+.quick-icon{color:#7ca0b3}
+.quick-grid i{color:#b8d5e1}
+.prototype-status{display:none}
+
+.events-section{background:var(--fpv-mist-2);position:relative}
+.events-section:before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:linear-gradient(115deg,rgba(255,255,255,.36),transparent 45%);
+}
+.events-section>.container{position:relative}
+.competition-gateway-home{
+  overflow:hidden;
+  border:0;
+  border-radius:4px;
+  background:var(--fpv-deep);
+  color:#fff;
+  padding:0;
+  gap:0;
+  grid-template-columns:1.12fr .88fr;
+  box-shadow:0 22px 60px rgba(3,24,39,.12);
+}
+.competition-gateway-home>div:first-child{padding:54px 56px}
+.competition-gateway-home h3{color:#fff;margin-top:18px}
+.competition-gateway-home p{color:#b8ccd8}
+.competition-gateway-home .tag{border-color:rgba(255,255,255,.2);color:#c8dbe4;background:rgba(255,255,255,.04)}
+.competition-gateway-home .btn-dark{background:#fff;color:var(--fpv-deep);border-radius:4px}
+.competition-home-links{
+  border:0;
+  background:#082c43;
+  padding:20px 34px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.competition-home-links a{
+  color:#fff;
+  border-color:rgba(255,255,255,.14);
+  min-height:86px;
+  padding:22px 0;
+}
+.competition-home-links span,.competition-home-links i{color:var(--fpv-sky)}
+
+.national-section{background:var(--fpv-deep);padding:0}
+.national-shell{min-height:690px}
+.national-copy{padding-right:70px}
+.national-visual{border-radius:4px}
+
+.discover-preview{background:#dfe9ed}
+.discover-card{border-radius:4px;background:#eef3f5}
+.discover-card.big{background:linear-gradient(145deg,#cfe4ec,#e8f1f4)}
+.discover-card:nth-child(2){background:#f2efe8}
+.discover-card:nth-child(3){background:#d5e5ea}
+
+.news-section{background:var(--fpv-warm)}
+.news-image{border-radius:4px}
+.news-side{border-top:2px solid var(--fpv-deep)}
+.news-card{border-color:#c9c8c1}
+
+.formation-section{background:#d8e5ea;padding-top:76px}
+.formation-shell{
+  border-radius:4px;
+  background:
+    linear-gradient(105deg,rgba(3,24,39,.98),rgba(6,57,82,.92)),
+    url("../assets/descobrir-quero-experimentar.png") center/cover;
+  border-left:5px solid var(--fpv-red);
+}
+
+.club-preview{background:#e6edf0;padding-top:76px}
+.club-shell{border-radius:4px;border:0;box-shadow:0 18px 50px rgba(3,24,39,.08)}
+.club-copy{background:#f3f5f4}
+.map-art{background:#0a3a57}
+.map-art .portugal-real-map{filter:drop-shadow(0 18px 35px rgba(0,0,0,.18))}
+.site-footer{margin-top:0}
+
+body:not(.home){background:#e8eef1}
+body:not(.home) .site-header{
+  background:rgba(3,24,39,.94);
+  border-bottom:1px solid rgba(255,255,255,.12);
+}
+.page-hero{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(120deg,#031827,#0a4865)!important;
+}
+.page-hero:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+  background-size:72px 72px;
+  mask-image:linear-gradient(90deg,transparent 15%,#000 70%);
+  -webkit-mask-image:linear-gradient(90deg,transparent 15%,#000 70%);
+}
+.page-hero>.container{position:relative;z-index:1}
+.section-paper,.real-clubs-page{background:#dfe8ec!important}
+body:not(.home) main>.section:not(.section-dark):not(.section-paper):not(.real-clubs-page){background:#f2f4f3}
+body:not(.home) main>.section:nth-of-type(3):not(.section-dark){background:#e4ecef}
+.institution-card,.journey-card,.story-card,.real-club-card,.course-preview-card,.performance-card{border-radius:6px!important}
+.news-filter button,.club-search-panel,.document-row,.search-page-form input{border-radius:6px!important}
+
+[data-reveal]{transition:opacity .72s var(--fpv-ease),transform .72s var(--fpv-ease)}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{
+  outline:2px solid var(--fpv-blue);
+  outline-offset:3px;
+}
+
+@media(max-width:1080px){
+  .home-hero .hero-content{grid-template-columns:1fr 1fr;gap:30px}
+  .home-hero h1{font-size:clamp(66px,8vw,92px)}
+  .hero-visual{min-height:520px}
+  .competition-gateway-home>div:first-child{padding:44px}
+}
+@media(max-width:760px){
+  .section{padding:68px 0}
+  .home .nav-shell{height:76px}
+  .home .brand-copy span{display:none}
+  .home .myfpv{display:none}
+  .home .mobile-menu{inset:76px 0 0;background:var(--fpv-deep);color:#fff}
+  .home .mobile-menu .mobile-myfpv{background:#fff;color:var(--fpv-deep)}
+  .home-hero{min-height:auto;background-size:48px 48px}
+  .home-hero:before{display:none}
+  .home-hero .hero-content{
+    min-height:auto;
+    grid-template-columns:1fr;
+    gap:26px;
+    padding:32px 0 44px;
+  }
+  .home-hero .hero-copy{padding:12px 0 0}
+  .home-hero h1{font-size:clamp(56px,16vw,78px);line-height:.86;margin:28px 0 22px}
+  .home-hero .hero-copy>p{font-size:15px;line-height:1.65}
+  .home-hero .hero-actions{width:100%;gap:10px}
+  .home-hero .btn-light{width:100%}
+  .home-hero .btn-ghost{width:100%;min-height:48px}
+  .hero-indexline{margin-top:32px}
+  .hero-visual{min-height:430px;border-radius:3px 3px 42px 3px}
+  .hero-visual-meta{left:22px;right:22px;bottom:22px}
+  .hero-visual-meta strong{font-size:26px}
+  .quick-grid{grid-template-columns:1fr 1fr}
+  .quick-grid a{min-height:82px}
+  .competition-gateway-home{grid-template-columns:1fr}
+  .competition-gateway-home>div:first-child{padding:34px 26px}
+  .competition-home-links{padding:12px 26px}
+  .competition-home-links a{min-height:70px}
+  .national-shell{min-height:auto}
+  .formation-section,.club-preview{padding-top:58px}
+}
+@media(max-width:420px){
+  .home-hero h1{font-size:56px}
+  .hero-indexline{font-size:9px}
+  .hero-visual{min-height:390px}
+  .quick-grid{grid-template-columns:1fr 1fr}
+}
+@media(prefers-reduced-motion:reduce){
+  .hero-visual img{transition:none}
+  [data-reveal]{transition:none}
+}
