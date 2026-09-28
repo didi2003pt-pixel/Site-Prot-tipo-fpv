@@ -108,3 +108,43 @@ input,select,textarea{font-size:16px}
 @media (prefers-reduced-motion:reduce){
   .home-hero-visual img,.home-intent-grid a,.skip-link{transition:none!important}
 }
+
+/* Regional association structure */
+.regional-associations{margin:34px 0 48px}
+.regional-associations-heading{display:grid;grid-template-columns:1fr minmax(280px,.8fr);gap:20px 60px;align-items:end;margin-bottom:22px}
+.regional-associations-heading .eyebrow{grid-column:1/-1}
+.regional-associations-heading h2{font:600 clamp(38px,4.5vw,62px)/.96 "Space Grotesk";letter-spacing:-.045em;margin:0}
+.regional-associations-heading p{margin:0;color:var(--muted);line-height:1.7}
+.regional-association-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid #cdd8df;border-left:1px solid #cdd8df}
+.regional-association-card{min-height:190px;padding:24px;display:flex;flex-direction:column;gap:14px;border-right:1px solid #cdd8df;border-bottom:1px solid #cdd8df;background:#fff;transition:background .2s ease,color .2s ease,transform .2s ease}
+.regional-association-card .regional-code,.club-association-heading .regional-code{font:800 11px "Space Grotesk";letter-spacing:.12em;color:var(--ocean)}
+.regional-association-card strong{font:600 18px/1.2 "Space Grotesk";letter-spacing:-.025em;margin-top:auto}
+.regional-association-card .regional-link{font-size:11px;font-weight:800;color:var(--muted)}
+a.regional-association-card:hover{background:var(--navy);color:#fff;transform:translateY(-3px)}
+a.regional-association-card:hover .regional-code,a.regional-association-card:hover .regional-link{color:var(--sky)}
+.regional-association-card--plain{background:var(--paper)}
+
+.club-association-directory{display:grid;gap:72px}
+.club-association-group{display:grid;gap:22px}
+.club-association-heading{display:flex;justify-content:space-between;gap:28px;align-items:end;padding-bottom:18px;border-bottom:1px solid var(--ink)}
+.club-association-heading h3{font:600 clamp(28px,3vw,42px)/1 "Space Grotesk";letter-spacing:-.035em;margin:8px 0 6px;max-width:760px}
+.club-association-heading .club-association-count{font-size:11px;color:var(--muted)}
+.club-association-heading>a{font-size:12px;font-weight:800;white-space:nowrap;border-bottom:1px solid #9fb2be;padding-bottom:5px}
+.association-club-grid{margin-top:0}
+
+@media(max-width:1180px){
+  .regional-association-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:760px){
+  .regional-associations{margin:28px 0 40px}
+  .regional-associations-heading{grid-template-columns:1fr;gap:10px}
+  .regional-association-grid{grid-template-columns:1fr 1fr}
+  .regional-association-card{min-height:150px;padding:20px}
+  .club-association-directory{gap:54px}
+  .club-association-heading{align-items:flex-start;flex-direction:column}
+  .club-association-heading>a{white-space:normal}
+}
+@media(max-width:480px){
+  .regional-association-grid{grid-template-columns:1fr}
+  .regional-association-card{min-height:128px}
+}
