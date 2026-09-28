@@ -204,6 +204,8 @@
     const index=[
       ['Página','Descobrir a Vela','Começar, experimentar, barcos e escolas','descobrir.html'],
       ['Página','Competição','Calendário, rankings, resultados e serviços competitivos','competicao.html'],
+      ['Competição','Resultados Internacionais','Resultados de velejadores portugueses validados pela FPV','resultados-internacionais.html'],
+      ['Competição','Submeter Resultado Internacional','Comunicar uma participação internacional à FPV','submeter-resultado.html'],
       ['Alto Rendimento','Atletas','Equipa Olímpica e atletas por classe','atletas-equipas.html'],
       ['Alto Rendimento','Projeto Olímpico — LA 2028','Ciclo olímpico atual e documentação','projeto-olimpico.html'],
       ['Federação','Centro de Documentação','Regulamentos, formulários, atas, relatórios e critérios','documentacao.html'],
