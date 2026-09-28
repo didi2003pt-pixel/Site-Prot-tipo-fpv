@@ -277,6 +277,32 @@ app.get('/api/inspect-sailti', async (req,res)=>{
   }catch(error){res.status(422).json({ok:false,error:error.message||String(error)});}
 });
 
+
+app.get('/api/inspect-script', async (req,res)=>{
+  try{
+    const raw=String(req.query.url||'');
+    if(!raw) return res.status(400).json({ok:false,error:'url required'});
+    const fetched=await safeFetch(raw);
+    const text=fetched.buffer.toString('utf8');
+    const terms=['result','results','race','ajax','getJSON','post','load(','$.get','$.post','url:','json','pdf','text/'];
+    const hits={};
+    for(const term of terms){
+      const lower=text.toLowerCase();
+      const t=term.toLowerCase();
+      const snippets=[];
+      let from=0;
+      while(snippets.length<20){
+        const i=lower.indexOf(t,from);
+        if(i<0) break;
+        snippets.push(text.slice(Math.max(0,i-240),Math.min(text.length,i+520)));
+        from=i+t.length;
+      }
+      if(snippets.length) hits[term]=snippets;
+    }
+    res.json({ok:true,final_url:fetched.finalUrl,length:text.length,hits});
+  }catch(error){res.status(422).json({ok:false,error:error.message||String(error)});}
+});
+
 app.post('/api/analyze-url',async(req,res)=>{
   try{
     const {url,athlete=''}=req.body||{};
