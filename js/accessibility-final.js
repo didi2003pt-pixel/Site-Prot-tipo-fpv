@@ -17,7 +17,8 @@
     'formacoes.html':'formacao.html','formacao-detalhe.html':'formacao.html',
     'projeto-olimpico.html':'alto-rendimento.html','historico-olimpico.html':'alto-rendimento.html',
     'perfil-alto-rendimento.html':'alto-rendimento.html','atletas-equipas.html':'alto-rendimento.html',
-    'estrutura-alto-rendimento.html':'alto-rendimento.html','clube.html':'clubes.html'
+    'estrutura-alto-rendimento.html':'alto-rendimento.html','clube.html':'clubes.html',
+    'resultados-internacionais.html':'competicao.html','submeter-resultado.html':'competicao.html'
   };
   document.querySelectorAll('.desktop-nav a').forEach(a=>{
     const href=(a.getAttribute('href')||'').split('?')[0].toLowerCase();
