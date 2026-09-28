@@ -358,6 +358,36 @@ async function analyzeUrlSource(url, athlete='', declaredResult=null){
   };
 }
 
+app.get('/api/debug-sailti-raw', async (req,res)=>{
+  try{
+    const raw=String(req.query.url||'');
+    if(!raw) return res.status(400).json({ok:false,error:'url required'});
+    const fetched=await safeFetch(raw);
+    const html=fetched.buffer.toString('utf8');
+    const $=cheerio.load(html);
+    const tables=[];
+    $('table').each((i,table)=>{
+      const rows=[];
+      $(table).find('tr').slice(0,6).each((_,tr)=>{
+        rows.push($(tr).find('th,td').map((__,el)=>$(el).text().replace(/\s+/g,' ').trim()).get());
+      });
+      tables.push({i,classes:$(table).attr('class')||'',id:$(table).attr('id')||'',rowCount:$(table).find('tr').length,rows});
+    });
+    const snippets=(html.match(/.{0,250}(?:onlyeur|overall|europe|resultsajax|idsc2r).{0,600}/gi)||[]).slice(0,80);
+    const hrefs=[];
+    $('a[href],form[action],input,button').each((_,el)=>{
+      const attrs={tag:el.tagName};
+      for(const n of ['href','action','name','value','id','class','data-url','data-action']){
+        const v=$(el).attr(n); if(v) attrs[n]=v;
+      }
+      const txt=$(el).text().replace(/\s+/g,' ').trim();
+      if(txt) attrs.text=txt;
+      if(/onlyeur|overall|europe|result|ranking/i.test(JSON.stringify(attrs))) hrefs.push(attrs);
+    });
+    res.json({ok:true,final_url:fetched.finalUrl,tables,snippets,controls:hrefs.slice(0,100)});
+  }catch(error){res.status(422).json({ok:false,error:error.message||String(error)});}
+});
+
 app.post('/api/analyze-url',async(req,res)=>{
   try{
     const {url,athlete='',declaredResult=null}=req.body||{};
