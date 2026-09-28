@@ -138,7 +138,11 @@ function analyzeStructuredTables(tables, athlete, declaredResult=null){
     const parsed=[];
     for(let i=1;i<rows.length;i++){
       const cells=rows[i];
-      const rank=rankNumber(cells[rankIdx]);
+      let rank=rankNumber(cells[rankIdx]);
+      // SailTi's overall table stores a sort key such as "a_0000001010"
+      // in the first cell instead of a visible rank. The row order itself is
+      // the official overall position, so use the data-row index as fallback.
+      if(!rank && rankIdx===0 && headers[0]==='' && extractCountryCode(cells[natIdx])) rank=i;
       const nat=extractCountryCode(cells[natIdx]);
       const name=nameIdx>=0?(cells[nameIdx]||''):cells.join(' ');
       if(rank && nat) parsed.push({rank,nat,name,cells});
