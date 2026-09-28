@@ -154,3 +154,43 @@ a.regional-association-card:hover .regional-code,a.regional-association-card:hov
   .regional-association-grid{grid-template-columns:1fr}
   .regional-association-card{min-height:108px}
 }
+
+/* Club directory spacing pass — keep the first association close to the hero */
+.real-clubs-page{padding-top:28px!important;padding-bottom:88px}
+.regional-associations{margin:0 0 22px!important}
+.regional-associations-heading{grid-template-columns:1fr auto!important;gap:8px 28px!important;margin-bottom:12px!important}
+.regional-associations-heading .eyebrow{grid-column:1/-1}
+.regional-associations-heading h2{font-size:clamp(30px,3.2vw,42px)!important}
+.regional-associations-heading p{max-width:390px;font-size:12px!important}
+.regional-association-grid{gap:8px!important}
+.regional-association-card{min-height:96px!important;padding:14px 15px!important;border-radius:12px!important;gap:6px!important}
+.regional-association-card strong{font-size:13px!important;line-height:1.2!important;margin-top:4px!important}
+.regional-association-card .regional-link{margin-top:auto;font-size:9px!important}
+.club-search-panel{padding:20px!important;border-radius:16px!important;gap:12px 18px!important;margin-bottom:24px!important;box-shadow:0 8px 24px rgba(7,35,55,.045)!important}
+.club-search-main input,.club-filter-row select{height:52px!important}
+.club-search-hint{display:none}
+.club-list-heading{margin:26px 0 16px!important}
+.club-list-heading h2{font-size:34px!important}
+.club-association-directory{gap:36px!important}
+.club-association-group{gap:14px!important}
+.club-association-heading{padding:14px 16px!important}
+.club-association-heading h3{font-size:clamp(22px,2.2vw,29px)!important;margin:4px 0 2px!important}
+.club-association-heading>a{padding:8px 11px!important}
+@media(max-width:1180px){
+  .regional-association-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important}
+}
+@media(max-width:900px){
+  .regional-association-grid{grid-template-columns:repeat(3,1fr)!important}
+  .regional-associations-heading{grid-template-columns:1fr!important}
+}
+@media(max-width:600px){
+  .real-clubs-page{padding-top:20px!important}
+  .regional-association-grid{grid-template-columns:1fr 1fr!important}
+  .regional-association-card{min-height:88px!important}
+  .club-search-panel{padding:16px!important}
+  .club-list-heading{margin-top:22px!important}
+}
+@media(max-width:420px){
+  .regional-association-grid{grid-template-columns:1fr!important}
+  .regional-association-card{min-height:78px!important}
+}
