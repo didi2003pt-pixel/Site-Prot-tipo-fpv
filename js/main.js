@@ -116,7 +116,6 @@
     const filter = btn.dataset.newsFilter;
     newsCards.forEach(card => card.hidden = filter !== 'all' && card.dataset.newsCategory !== filter);
   }));
-  });
 })();
 
 
