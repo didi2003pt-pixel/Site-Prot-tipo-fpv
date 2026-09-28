@@ -280,3 +280,10 @@ body.result-review-open{overflow:hidden}
   .result-form-actions{align-items:stretch;flex-direction:column}.result-form-actions .btn{width:100%}
   .result-review-panel{padding:26px 20px}.result-review-data>div{grid-template-columns:1fr;gap:4px}
 }
+
+
+.international-results-intro{background:#f7f9fb}
+.result-submit-shell-light{color:var(--ink);padding:34px;border:1px solid var(--line);border-radius:20px;background:#fff;box-shadow:0 12px 38px rgba(7,35,55,.04)}
+.result-submit-shell-light p{color:var(--muted)}
+.international-results-actions{display:flex;flex-direction:column;align-items:flex-start;gap:16px;min-width:220px}
+@media(max-width:760px){.result-submit-shell-light{padding:24px}.international-results-actions{min-width:0;width:100%}.international-results-actions .btn{width:100%}}
