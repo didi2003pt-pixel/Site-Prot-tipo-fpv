@@ -197,7 +197,7 @@
     const payload = await requestJson('/api/analyze-url', {
       method:'POST',
       headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({url,athlete:athleteInput.value.trim()})
+      body:JSON.stringify({url,athlete:athleteInput.value.trim(),declaredResult:declaredResult?.value.trim()||null})
     });
     renderAnalysis(mapServerResult(payload, parsed.hostname + ' · link oficial'));
   }
@@ -213,6 +213,7 @@
     const data = new FormData();
     data.append('file', file);
     data.append('athlete', athleteInput.value.trim());
+    data.append('declaredResult', declaredResult?.value.trim()||'');
 
     const payload = await requestJson('/api/analyze-pdf', { method:'POST', body:data });
     renderAnalysis(mapServerResult(payload, file.name + ' · PDF'));
