@@ -9,9 +9,11 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="css/style.css?v=20260923-v3" rel="stylesheet"/>
-<link href="css/modern.css" rel="stylesheet"/></head>
-<body class="home fpv-modern"><a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
+<link href="css/style.css" rel="stylesheet"/>
+<link href="css/accessibility-final.css" rel="stylesheet"/>
+</head>
+<body class="home">
+<a class="skip-link" href="#conteudo">Saltar para o conteúdo</a>
 <header class="site-header" id="top">
 <div class="container nav-shell">
 <a aria-label="Federação Portuguesa de Vela — Início" class="brand" href="index.html">
@@ -29,15 +31,15 @@
 </nav>
 <div class="nav-actions">
 <button aria-label="Pesquisar" class="icon-btn" data-open-search="" type="button">
-<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.6-4.6m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path></svg>
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="m21 21-4.6-4.6m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path></svg><span class="search-label">Pesquisar</span>
 </button>
 <a class="myfpv" href="myfpv.html">myFPV <span>↗</span></a>
-<button aria-controls="mobile-navigation" aria-expanded="false" aria-label="Abrir menu" class="menu-btn" data-menu-toggle="" type="button">
+<button aria-expanded="false" aria-label="Abrir menu" class="menu-btn" data-menu-toggle="" type="button">
 <span></span><span></span><span></span>
 </button>
 </div>
 </div>
-<div class="mobile-menu" data-mobile-menu="" id="mobile-navigation">
+<div class="mobile-menu" data-mobile-menu="">
 <div class="mobile-menu-inner container">
 <a href="descobrir.html"><span>01</span> Descobrir</a>
 <a href="competicao.html"><span>02</span> Competição</a>
@@ -51,35 +53,33 @@
 </div>
 </header>
 <main id="conteudo">
-<section class="hero"><div class="container hero-layout">
-<div class="hero-copy"><span class="hero-kicker"><i></i> Federação Portuguesa de Vela</span>
-<h1>Portugal<br/>navega <em>aqui.</em></h1>
-<p>Um país de mar. Um desporto para todos.<br/>Da primeira experiência à vela de alto rendimento.</p>
-<div class="hero-actions"><a class="btn btn-dark" href="descobrir.html">Descobrir a vela <span aria-hidden="true">↗</span></a><a class="hero-calendar" href="competicao.html">Calendário de provas <span aria-hidden="true">→</span></a></div>
-<div class="hero-footnote"><span>01 / Vela portuguesa</span><a href="#atalhos">Explorar <span aria-hidden="true">↓</span></a></div></div>
-<div class="hero-picture"><img alt="Velejadores em ação numa embarcação de vela ligeira" fetchpriority="high" height="1402" src="assets/descobrir-quero-competir.png" width="1122"/><div class="hero-picture-caption"><span>Da formação à competição</span><a href="alto-rendimento.html">O horizonte é só o início. <span aria-hidden="true">↗</span></a></div></div>
-</div></section><section class="quick-links" id="atalhos">
-<div class="container">
-<div class="quick-grid">
-<a href="competicao.html"><span class="quick-icon">01</span><strong>Calendário</strong><i>→</i></a>
-<a href="https://fpvela.pt/competicao/" rel="noreferrer" target="_blank"><span class="quick-icon">02</span><strong>Resultados</strong><i>↗</i></a>
-<a href="https://fpvela.pt/centro-de-documentacao/" rel="noreferrer" target="_blank"><span class="quick-icon">03</span><strong>Licenças</strong><i>↗</i></a>
-<a href="clubes.html"><span class="quick-icon">04</span><strong>Clubes</strong><i>→</i></a>
-<a href="formacao.html"><span class="quick-icon">05</span><strong>Formação</strong><i>→</i></a>
-<a href="documentacao.html"><span class="quick-icon">06</span><strong>Regulamentos</strong><i>→</i></a>
+<section class="home-hero" aria-labelledby="home-title">
+<div class="container home-hero-grid">
+<div class="home-hero-copy" data-reveal>
+<span class="hero-kicker hero-kicker-dark"><i></i> Federação Portuguesa de Vela</span>
+<h1 id="home-title">Portugal<br>navega <em>aqui.</em></h1>
+<p>Um país de mar. Um desporto para todos. Da primeira experiência à vela de alto rendimento.</p>
+<div class="home-hero-actions">
+<a class="btn btn-dark home-primary" href="descobrir.html">Descobrir a vela <span>↗</span></a>
+<a class="home-secondary" href="competicao.html">Competição <span>→</span></a>
 </div>
+<div class="home-hero-meta" aria-hidden="true"><span>01 / Vela portuguesa</span><span>Do primeiro bordo ao alto rendimento.</span></div>
+</div>
+<a class="home-hero-visual" href="descobrir.html" aria-label="Descobrir a vela">
+<img src="assets/descobrir-quero-competir.png" alt="Jovem velejador a navegar num barco à vela">
+<div class="home-hero-visual-shade"></div>
+<div class="home-hero-caption"><span>Da descoberta à competição</span><strong>O horizonte é só o início.</strong><i aria-hidden="true">↗</i></div>
+</a>
 </div>
 </section>
-<section class="section events-section">
+<section class="home-intents" id="atalhos" aria-labelledby="intents-title">
 <div class="container">
-<div class="section-heading" data-reveal="">
-<div><span class="eyebrow">Competição</span><h2>Dentro de água.
-Dentro da competição.</h2></div>
-<a class="text-link" href="competicao.html">Entrar na competição <span>↗</span></a>
-</div>
-<div class="competition-gateway-home" data-reveal="">
-<div><span class="tag">Competição FPV</span><h3>A próxima largada começa aqui.</h3><p>Consulta o calendário, acompanha os resultados e encontra a documentação de competição.</p><a class="btn btn-dark" href="competicao.html">Explorar competição <span>→</span></a></div>
-<div class="competition-home-links"><a href="competicao.html"><span>01</span><strong>Calendário de provas</strong><i>→</i></a><a href="competicao.html"><span>02</span><strong>Rankings &amp; resultados</strong><i>→</i></a><a href="documentacao.html?area=competicao"><span>03</span><strong>Documentação</strong><i>→</i></a></div>
+<div class="home-intents-head"><span class="eyebrow">Acesso rápido</span><h2 id="intents-title">O que procuras?</h2></div>
+<div class="home-intent-grid">
+<a href="descobrir.html"><span>01</span><strong>Quero começar</strong><small>Primeiros passos na vela</small><i>→</i></a>
+<a href="clubes.html"><span>02</span><strong>Encontrar um clube</strong><small>Clubes e escolas por região</small><i>→</i></a>
+<a href="competicao.html"><span>03</span><strong>Competição</strong><small>Calendário, rankings e resultados</small><i>→</i></a>
+<a href="documentacao.html"><span>04</span><strong>Documentação</strong><small>Regulamentos, formulários e atas</small><i>→</i></a>
 </div>
 </div>
 </section>
@@ -88,17 +88,17 @@ Dentro da competição.</h2></div>
 <div class="national-shell">
 <div class="national-copy" data-reveal="">
 <span class="eyebrow eyebrow-light">Alto Rendimento</span>
-<h2>Portugal<br/>no mundo.</h2>
-<p>Atletas, Equipas FPV, preparação olímpica e critérios de seleção. Uma área para acompanhar quem representa a vela portuguesa no mais alto nível.</p>
+<h2>Portugal<br>no mundo.</h2>
+<p>Atletas, estrutura técnica, preparação olímpica e critérios de seleção. Uma área para acompanhar quem representa a vela portuguesa no mais alto nível.</p>
 <div class="stat-strip">
 <div><strong>LA28</strong><span>Ciclo Olímpico</span></div>
-<div><strong>FPV</strong><span>Atletas · Equipas · Projeto Olímpico</span></div>
+<div><strong>FPV</strong><span>Atletas · Estrutura · Projeto Olímpico</span></div>
 </div>
 <a class="btn btn-light" href="alto-rendimento.html">Explorar Alto Rendimento <span>→</span></a>
 </div>
 <div class="national-visual national-photo-card" data-reveal="">
 <div class="flag-line"></div>
-<img alt="Vela portuguesa em competição internacional" class="national-photo" decoding="async" loading="lazy" src="assets/alto-rendimento-portugal.png"/>
+<img alt="Vela portuguesa em competição internacional" class="national-photo" src="assets/alto-rendimento-portugal.png">
 <div aria-hidden="true" class="national-photo-shade"></div>
 <div class="national-topline">
 <span class="athlete-label">Alto Rendimento FPV</span>
@@ -106,7 +106,7 @@ Dentro da competição.</h2></div>
 </div>
 <div class="athlete-meta national-photo-meta">
 <span>Portugal no mundo</span>
-<strong>Atletas · Equipas FPV · Projeto Olímpico</strong>
+<strong>Atletas · Estrutura Técnica · Projeto Olímpico</strong>
 <a href="alto-rendimento.html">Critérios, resultados e percurso olímpico <span>↗</span></a>
 </div>
 </div>
@@ -117,7 +117,7 @@ Dentro da competição.</h2></div>
 <div class="container">
 <div class="section-heading" data-reveal="">
 <div><span class="eyebrow">Descobrir a Vela</span><h2>Nunca velejaste?<br/><em>Começa aqui.</em></h2></div>
-<p class="heading-copy">Há um lugar para ti na vela. Encontra o teu ponto de partida.</p>
+<p class="heading-copy">A vela deve ser fácil de descobrir. Criámos percursos claros para crianças, adultos e famílias.</p>
 </div>
 <div class="discover-grid">
 <a class="discover-card big discover-card--start" data-reveal="" href="descobrir.html">
@@ -140,7 +140,7 @@ Dentro da competição.</h2></div>
 </div>
 <div class="news-grid">
 <article class="news-lead" data-reveal="">
-<a aria-label="Consultar notícias de competição" class="news-image news-img-1" href="noticias.html"></a>
+<a class="news-image news-img-1" href="noticias.html"></a>
 <div class="news-meta"><span class="tag">Competição</span><time>07 JUL 2026</time></div>
 <h3><a href="noticias.html">XXXVIII Campeonato de Portugal de Juniores e Absoluto</a></h3>
 </article>
@@ -185,12 +185,11 @@ Dentro da competição.</h2></div>
 <div class="club-shell" data-reveal="">
 <div class="club-copy">
 <span class="eyebrow">Clubes</span>
-<h2>A tua próxima
-aventura começa perto.</h2>
-<p>No mar e nas águas interiores. Descobre os clubes e as escolas de vela por região.</p>
+<h2>O mar<br/>mais perto.</h2>
+<p>Encontra clubes, escolas de vela e estruturas de formação por região.</p>
 <a class="btn btn-dark" href="clubes.html">Encontrar um clube <span>↗</span></a>
 </div>
-<div aria-label="Mapa real de Portugal Continental" class="map-art"><img alt="Mapa de Portugal com distribuição de clubes de vela" class="portugal-real-map" decoding="async" loading="lazy" src="assets/mapa-portugal-clubes-fpv.png"/></div>
+<div aria-label="Mapa real de Portugal Continental" class="map-art"><img alt="Mapa de Portugal com distribuição de clubes de vela" class="portugal-real-map" src="assets/mapa-portugal-clubes-fpv.png"/></div>
 </div>
 </div>
 </section>
@@ -221,7 +220,7 @@ aventura começa perto.</h2>
 <a href="https://fpvela.pt/politica-de-privacidade/" rel="noreferrer" target="_blank">Privacidade</a>
 <a href="https://fpvela.pt/contactos/" rel="noreferrer" target="_blank">Contactos</a>
 </div>
-<span class="preview-note">Proposta de website · Em validação</span></div>
+</div>
 </footer>
 <div aria-hidden="true" class="search-overlay" data-search-overlay="">
 <div class="search-backdrop" data-close-search=""></div>
@@ -230,33 +229,32 @@ aventura começa perto.</h2>
 <span class="search-kicker">Pesquisa global</span>
 <button aria-label="Fechar" class="close-btn" data-close-search="" type="button">×</button>
 </div>
-<label class="search-input-wrap">
+<form action="pesquisa.html" class="search-input-wrap" method="get">
 <span class="sr-only">Pesquisar</span>
-<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.6-4.6m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path></svg>
-<input data-search-input="" placeholder="Atletas, clubes, provas, documentos…" type="search"/>
-</label>
+<svg aria-hidden="true" viewbox="0 0 24 24"><path d="m21 21-4.6-4.6m2.1-5.4a7.5 7.5 0 1 1-15 0 7.5 7.5 0 0 1 15 0Z"></path></svg>
+<input data-search-input="" name="q" placeholder="Atletas, clubes, documentos, formação…" type="search"/>
+</form>
 <div class="search-suggestions">
-<div>
-<span class="eyebrow">Acessos rápidos</span>
-<a href="competicao.html">Calendário de provas <span>→</span></a>
-<a href="clubes.html">Encontrar um clube <span>→</span></a>
-<a href="federacao.html#documentos">Documentação <span>→</span></a>
+<div><span class="eyebrow">Acessos rápidos</span>
+<a href="documentacao.html">Centro de Documentação <span>→</span></a>
+<a href="atletas-equipas.html">Atletas <span>→</span></a>
+<a href="clubes.html">Clubes <span>→</span></a>
+<a href="formacao.html">Formação <span>→</span></a>
 </div>
-<div>
-<span class="eyebrow">Sugestões</span>
-<button data-suggestion="Projeto Olímpico LA 2028" type="button">Projeto Olímpico LA 2028</button>
-<button data-suggestion="Formação" type="button">Formação</button>
-<button data-suggestion="Optimist" type="button">Optimist</button>
+<div><span class="eyebrow">Temas</span>
+<button data-suggestion="Alto Rendimento" type="button">Alto Rendimento</button>
+<button data-suggestion="ILCA 7" type="button">ILCA 7</button>
+<button data-suggestion="Regulamentos" type="button">Regulamentos</button>
 </div>
 </div>
-<div class="search-demo-result" data-search-result="" hidden="">
-<span class="tag">Pesquisa demonstrativa</span>
+<div class="search-result-preview" data-search-result="" hidden="">
+<span class="eyebrow">Pesquisa</span>
 <strong data-search-result-title=""></strong>
-<p>O website está preparado para pesquisa unificada em notícias, competições, atletas, clubes e documentação.</p>
+<a href="pesquisa.html">Ver resultados <span>→</span></a>
 </div>
-<p class="search-hint">Enter para pesquisar · Esc para fechar</p>
 </section>
 </div>
-<script src="js/main.js?v=20260923-v3"></script>
-<script defer="True" src="js/modern.js"></script></body>
+<script src="js/main.js"></script>
+<script src="js/accessibility-final.js"></script>
+</body>
 </html>
