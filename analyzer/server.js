@@ -247,36 +247,38 @@ app.get('/api/inspect-sailti', async (req,res)=>{
     const fetched=await safeFetch(raw);
     const html=fetched.buffer.toString('utf8');
     const $=cheerio.load(html);
-    const scripts=[];
+    const scriptSrcs=[];
+    const inlineHits=[];
     $('script').each((_,el)=>{
       const src=$(el).attr('src');
-      const txt=$(el).html()||'';
-      scripts.push(src ? {src:new URL(src,fetched.finalUrl).toString()} : {inline:txt.slice(0,1500)});
+      if(src){
+        try{scriptSrcs.push(new URL(src,fetched.finalUrl).toString());}catch{}
+      }else{
+        const txt=$(el).html()||'';
+        if(/result|race|ajax|load|sailti/i.test(txt)) inlineHits.push(txt.slice(0,6000));
+      }
     });
-    const links=[];
-    $('a[href],form[action],iframe[src],embed[src],object[data]').each((_,el)=>{
-      const rawv=$(el).attr('href')||$(el).attr('action')||$(el).attr('src')||$(el).attr('data');
-      if(!rawv) return;
-      try{links.push(new URL(rawv,fetched.finalUrl).toString());}catch{}
+    const attrs=[];
+    $('[data-url],[data-action],[data-results],[data-race],[data-text],form[action],iframe[src],a[href]').each((_,el)=>{
+      const obj={tag:el.tagName};
+      for(const name of ['data-url','data-action','data-results','data-race','data-text','action','src','href']){
+        const v=$(el).attr(name); if(v) obj[name]=v;
+      }
+      const rawtxt=JSON.stringify(obj);
+      if(/result|race|ajax|pdf|text/i.test(rawtxt)) attrs.push(obj);
     });
-    const interesting=[...new Set(links.filter(x=>/result|race|pdf|ajax|api|json|text/i.test(x)))].slice(0,100);
     res.json({
       ok:true,
       final_url:fetched.finalUrl,
-      content_type:fetched.contentType,
       title:$('title').text().trim(),
-      scripts,
-      interesting_links:interesting,
-      html_markers:{
-        loading:/Loading results/i.test(html),
-        sailti:/sailti/i.test(html),
-        text_params:(html.match(/text[\/'"=:?&-][A-Za-z0-9._-]+/gi)||[]).slice(0,40),
-        ajax_refs:(html.match(/[^"'\s]{0,80}(?:ajax|api|results)[^"'\s]{0,120}/gi)||[]).slice(0,40)
-      }
+      script_srcs:[...new Set(scriptSrcs)],
+      interesting_inline:inlineHits.slice(0,30),
+      interesting_attributes:attrs.slice(0,100),
+      loading:/Loading results/i.test(html),
+      html_result_snippets:(html.match(/.{0,180}(?:Loading results|race-results|resultsall|ajax|result).{0,500}/gi)||[]).slice(0,50)
     });
   }catch(error){res.status(422).json({ok:false,error:error.message||String(error)});}
 });
-
 
 app.get('/api/inspect-script', async (req,res)=>{
   try{
