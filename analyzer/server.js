@@ -99,14 +99,39 @@ function rankNumber(value){
   return m?Number(m[1]):null;
 }
 
-function analyzeStructuredTables(tables, athlete){
-  const target=normalize(athlete);
+function athleteNameMatches(name, athlete){
+  const hay=normalize(name);
+  const tokens=normalize(athlete).split(' ').filter(t=>t.length>1);
+  return tokens.length>0 && tokens.every(t=>hay.includes(t));
+}
+
+function numericDeclaredResult(value){
+  const m=String(value||'').match(/\d{1,4}/);
+  return m?Number(m[0]):null;
+}
+
+function extractCountryCode(value){
+  const exclusions=new Set(['BFD','DNF','DNS','DSQ','DNC','RET','OCS','UFD','DPI','RDG','SCP','DNE']);
+  const matches=String(value||'').toUpperCase().match(/\b[A-Z]{3}\b/g)||[];
+  return matches.find(x=>!exclusions.has(x))||null;
+}
+
+function analyzeStructuredTables(tables, athlete, declaredResult=null){
+  const declared=numericDeclaredResult(declaredResult);
   let best=null;
+  let bestScore=-Infinity;
+
   for(const rows of tables){
     if(rows.length<2) continue;
     const headers=rows[0].map(normalize);
-    const rankIdx=headers.findIndex(h=>/^(rank|place|pos|position|overall|classifica)/.test(h));
-    const natIdx=headers.findIndex(h=>/(^nat$|nation|country|pais|país)/.test(h));
+
+    let rankIdx=headers.findIndex(h=>/^(rank|place|pos|position|overall|classifica)/.test(h));
+    if(rankIdx<0 && rankNumber(rows[1]?.[0])) rankIdx=0;
+
+    let natIdx=headers.findIndex(h=>/(^nat$|nation|country|pais|país)/.test(h));
+    const sailIdx=headers.findIndex(h=>/^sail(?:\s*#|\s*no|\s*number)?$/.test(h)||h==='sail #');
+    if(natIdx<0 && sailIdx>=0) natIdx=sailIdx;
+
     const nameIdx=headers.findIndex(h=>/(sailor|name|nome|helm|skipper|velejador|crew|team)/.test(h));
     if(rankIdx<0 || natIdx<0) continue;
 
@@ -114,34 +139,45 @@ function analyzeStructuredTables(tables, athlete){
     for(let i=1;i<rows.length;i++){
       const cells=rows[i];
       const rank=rankNumber(cells[rankIdx]);
-      const nat=(cells[natIdx]||'').toUpperCase().match(COUNTRY_CODE)?.[0] || (cells[natIdx]||'').toUpperCase().trim();
+      const nat=extractCountryCode(cells[natIdx]);
       const name=nameIdx>=0?(cells[nameIdx]||''):cells.join(' ');
       if(rank && nat) parsed.push({rank,nat,name,cells});
     }
     if(!parsed.length) continue;
 
-    const athleteRow=target?parsed.find(r=>normalize(r.name).includes(target)||target.includes(normalize(r.name))):parsed.find(r=>r.nat==='POR');
-    const porRow=athleteRow || parsed.find(r=>r.nat==='POR');
-    if(!porRow) continue;
+    const athleteRow=athlete ? parsed.find(r=>athleteNameMatches(r.name,athlete)) : null;
+    const targetRow=athleteRow || (!athlete ? parsed.find(r=>r.nat==='POR') : null);
+    if(!targetRow) continue;
 
     const countries=[];
-    for(const r of parsed.slice().sort((a,b)=>a.rank-b.rank)){
+    const ordered=parsed.slice().sort((a,b)=>a.rank-b.rank);
+    for(const r of ordered){
       if(!countries.includes(r.nat)) countries.push(r.nat);
-      if(r===porRow || (r.rank===porRow.rank && r.nat===porRow.nat)) break;
+      if(r===targetRow || (r.rank===targetRow.rank && r.name===targetRow.name)) break;
     }
-    const countryRank=countries.indexOf(porRow.nat)+1;
+    const countryRank=countries.indexOf(targetRow.nat)+1;
+
     const candidate={
-      method:'html-table',
-      athlete:porRow.name.trim(),
-      result_general:porRow.rank,
-      country_code:porRow.nat,
+      method:sailIdx>=0 && nameIdx>=0 ? 'sailti-table' : 'html-table',
+      athlete:targetRow.name.trim(),
+      result_general:targetRow.rank,
+      country_code:targetRow.nat,
       result_country:countryRank>0?countryRank:null,
       rows_parsed:parsed.length,
       countries_counted:countries.length,
-      confidence: athleteRow ? 'alta' : 'média',
-      evidence: porRow.cells.join(' | ')
+      confidence:'alta',
+      evidence:targetRow.cells.join(' | ')
     };
-    if(!best || candidate.confidence==='alta') best=candidate;
+
+    let score=parsed.length;
+    if(declared!==null && candidate.result_general===declared) score+=10000;
+    if(candidate.method==='sailti-table') score+=500;
+    if(candidate.country_code==='POR') score+=100;
+
+    if(score>bestScore){
+      best=candidate;
+      bestScore=score;
+    }
   }
   return best;
 }
@@ -211,7 +247,59 @@ async function maybeFollowEmbeddedResultSource(buffer, contentType, baseUrl){
   return null;
 }
 
-async function analyzeBuffer(buffer, contentType, athlete, hintName=''){
+function extractSailtiAjaxUrls(html, baseUrl){
+  const urls=[];
+  const patterns=[
+    /url\s*:\s*['"]([^'"]*resultsajax[^'"]*)['"]/gi,
+    /['"]([^'"]*\/resultsajax\?[^'"]+)['"]/gi
+  ];
+  for(const re of patterns){
+    let m;
+    while((m=re.exec(html))){
+      const raw=(m[1]||'').replace(/&amp;/g,'&');
+      try{urls.push(new URL(raw,baseUrl).toString());}catch{}
+    }
+  }
+  return [...new Set(urls)].slice(0,20);
+}
+
+async function analyzeSailtiDynamic(buffer, contentType, baseUrl, athlete, declaredResult=null){
+  if(contentType.includes('pdf')) return null;
+  const html=buffer.toString('utf8');
+  const ajaxUrls=extractSailtiAjaxUrls(html,baseUrl);
+  if(!ajaxUrls.length) return null;
+
+  const candidates=[];
+  for(const ajaxUrl of ajaxUrls){
+    try{
+      const fetched=await safeFetch(ajaxUrl);
+      const doc=tableRowsFromHtml(fetched.buffer.toString('utf8'));
+      const analysis=analyzeStructuredTables(doc.tables,athlete,declaredResult);
+      if(analysis) candidates.push({analysis,ajaxUrl,tables:doc.tables.length});
+    }catch{}
+  }
+  if(!candidates.length) return null;
+
+  const declared=numericDeclaredResult(declaredResult);
+  candidates.sort((a,b)=>{
+    const ae=declared!==null && a.analysis.result_general===declared ? 1:0;
+    const be=declared!==null && b.analysis.result_general===declared ? 1:0;
+    if(ae!==be) return be-ae;
+    return (b.analysis.rows_parsed||0)-(a.analysis.rows_parsed||0);
+  });
+
+  const chosen=candidates[0];
+  return {
+    source_type:'sailti',
+    analysis:chosen.analysis,
+    manual_required:false,
+    note:'Classificação SailTi carregada através da fonte dinâmica oficial. Confirmar sempre antes de publicar.',
+    resolved_source_url:chosen.ajaxUrl,
+    sailti_sources_checked:ajaxUrls.length
+  };
+}
+
+async function analyzeBuffer(buffer, contentType, athlete, hintName='', declaredResult=null){
   const isPdf=contentType.includes('pdf') || /^%PDF-/.test(buffer.subarray(0,5).toString()) || /\.pdf$/i.test(hintName);
   if(isPdf){
     const parsed=await pdf(buffer);
@@ -228,7 +316,7 @@ async function analyzeBuffer(buffer, contentType, athlete, hintName=''){
 
   const html=buffer.toString('utf8');
   const doc=tableRowsFromHtml(html);
-  const result=analyzeStructuredTables(doc.tables,athlete) || analyzeText(doc.text,athlete);
+  const result=analyzeStructuredTables(doc.tables,athlete,declaredResult) || analyzeText(doc.text,athlete);
   return {
     source_type:'html',
     title:doc.title||null,
@@ -240,91 +328,56 @@ async function analyzeBuffer(buffer, contentType, athlete, hintName=''){
 }
 
 
-app.get('/api/inspect-sailti', async (req,res)=>{
-  try{
-    const raw=String(req.query.url||'');
-    if(!raw) return res.status(400).json({ok:false,error:'url required'});
-    const fetched=await safeFetch(raw);
-    const html=fetched.buffer.toString('utf8');
-    const $=cheerio.load(html);
-    const scriptSrcs=[];
-    const inlineHits=[];
-    $('script').each((_,el)=>{
-      const src=$(el).attr('src');
-      if(src){
-        try{scriptSrcs.push(new URL(src,fetched.finalUrl).toString());}catch{}
-      }else{
-        const txt=$(el).html()||'';
-        if(/result|race|ajax|load|sailti/i.test(txt)) inlineHits.push(txt.slice(0,6000));
-      }
-    });
-    const attrs=[];
-    $('[data-url],[data-action],[data-results],[data-race],[data-text],form[action],iframe[src],a[href]').each((_,el)=>{
-      const obj={tag:el.tagName};
-      for(const name of ['data-url','data-action','data-results','data-race','data-text','action','src','href']){
-        const v=$(el).attr(name); if(v) obj[name]=v;
-      }
-      const rawtxt=JSON.stringify(obj);
-      if(/result|race|ajax|pdf|text/i.test(rawtxt)) attrs.push(obj);
-    });
-    res.json({
-      ok:true,
-      final_url:fetched.finalUrl,
-      title:$('title').text().trim(),
-      script_srcs:[...new Set(scriptSrcs)],
-      interesting_inline:inlineHits.slice(0,30),
-      interesting_attributes:attrs.slice(0,100),
-      loading:/Loading results/i.test(html),
-      html_result_snippets:(html.match(/.{0,180}(?:Loading results|race-results|resultsall|ajax|result).{0,500}/gi)||[]).slice(0,50)
-    });
-  }catch(error){res.status(422).json({ok:false,error:error.message||String(error)});}
-});
+async function analyzeUrlSource(url, athlete='', declaredResult=null){
+  const fetched=await safeFetch(url);
+  let result=await analyzeBuffer(fetched.buffer,fetched.contentType,athlete,fetched.finalUrl,declaredResult);
+  let resolvedSourceUrl=fetched.finalUrl;
 
-app.get('/api/inspect-script', async (req,res)=>{
-  try{
-    const raw=String(req.query.url||'');
-    if(!raw) return res.status(400).json({ok:false,error:'url required'});
-    const fetched=await safeFetch(raw);
-    const text=fetched.buffer.toString('utf8');
-    const terms=['result','results','race','ajax','getJSON','post','load(','$.get','$.post','url:','json','pdf','text/'];
-    const hits={};
-    for(const term of terms){
-      const lower=text.toLowerCase();
-      const t=term.toLowerCase();
-      const snippets=[];
-      let from=0;
-      while(snippets.length<20){
-        const i=lower.indexOf(t,from);
-        if(i<0) break;
-        snippets.push(text.slice(Math.max(0,i-240),Math.min(text.length,i+520)));
-        from=i+t.length;
-      }
-      if(snippets.length) hits[term]=snippets;
-    }
-    res.json({ok:true,final_url:fetched.finalUrl,length:text.length,hits});
-  }catch(error){res.status(422).json({ok:false,error:error.message||String(error)});}
-});
-
-app.post('/api/analyze-url',async(req,res)=>{
-  try{
-    const {url,athlete=''}=req.body||{};
-    if(!url) return res.status(400).json({ok:false,error:'Indica o link oficial.'});
-    const fetched=await safeFetch(url);
-    let result=await analyzeBuffer(fetched.buffer,fetched.contentType,athlete,fetched.finalUrl);
-    let sourceUrl=fetched.finalUrl;
-    if((!result.analysis || result.manual_required) && !fetched.contentType.includes('pdf')){
+  if(!fetched.contentType.includes('pdf')){
+    const sailti=await analyzeSailtiDynamic(fetched.buffer,fetched.contentType,fetched.finalUrl,athlete,declaredResult);
+    if(sailti?.analysis){
+      result=sailti;
+      resolvedSourceUrl=sailti.resolved_source_url||resolvedSourceUrl;
+    }else if(!result.analysis || result.manual_required){
       const discovered=await maybeFollowEmbeddedResultSource(fetched.buffer,fetched.contentType,fetched.finalUrl);
       if(discovered){
-        const pdfResult=await analyzeBuffer(discovered.buffer,discovered.contentType,athlete,discovered.finalUrl);
+        const pdfResult=await analyzeBuffer(discovered.buffer,discovered.contentType,athlete,discovered.finalUrl,declaredResult);
         if(pdfResult.analysis){
           result={...pdfResult, discovered_from:fetched.finalUrl};
-          sourceUrl=discovered.finalUrl;
+          resolvedSourceUrl=discovered.finalUrl;
         }
       }
     }
-    res.json({ok:true,source_url:sourceUrl,...result});
+  }
+
+  return {
+    ok:true,
+    source_url:fetched.finalUrl,
+    resolved_source_url:resolvedSourceUrl,
+    ...result
+  };
+}
+
+app.post('/api/analyze-url',async(req,res)=>{
+  try{
+    const {url,athlete='',declaredResult=null}=req.body||{};
+    if(!url) return res.status(400).json({ok:false,error:'Indica o link oficial.'});
+    res.json(await analyzeUrlSource(url,athlete,declaredResult));
   }catch(error){
     res.status(422).json({ok:false,error:error.message||'Não foi possível analisar a fonte.'});
+  }
+});
+
+// Temporary GET smoke-test route; removed after validation.
+app.get('/api/test-analyze-url',async(req,res)=>{
+  try{
+    const url=String(req.query.url||'');
+    const athlete=String(req.query.athlete||'');
+    const declaredResult=req.query.result||null;
+    if(!url) return res.status(400).json({ok:false,error:'url required'});
+    res.json(await analyzeUrlSource(url,athlete,declaredResult));
+  }catch(error){
+    res.status(422).json({ok:false,error:error.message||String(error)});
   }
 });
 
@@ -333,7 +386,7 @@ app.post('/api/analyze-pdf',upload.single('file'),async(req,res)=>{
     if(!req.file) return res.status(400).json({ok:false,error:'Seleciona um PDF.'});
     const type=(req.file.mimetype||'').toLowerCase();
     if(!type.includes('pdf') && !/\.pdf$/i.test(req.file.originalname||'')) return res.status(400).json({ok:false,error:'O ficheiro tem de ser PDF.'});
-    const result=await analyzeBuffer(req.file.buffer,'application/pdf',req.body?.athlete||'',req.file.originalname||'');
+    const result=await analyzeBuffer(req.file.buffer,'application/pdf',req.body?.athlete||'',req.file.originalname||'',req.body?.declaredResult||null);
     res.json({ok:true,file_name:req.file.originalname,...result});
   }catch(error){
     res.status(422).json({ok:false,error:error.message||'Não foi possível analisar o PDF.'});
