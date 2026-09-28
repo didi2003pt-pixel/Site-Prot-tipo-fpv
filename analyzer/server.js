@@ -251,6 +251,78 @@ async function maybeFollowEmbeddedResultSource(buffer, contentType, baseUrl){
   return null;
 }
 
+function analyzeSailtiHtml(html, athlete, declaredResult=null){
+  const $=cheerio.load(html);
+  const declared=numericDeclaredResult(declaredResult);
+  let best=null;
+  let bestScore=-Infinity;
+
+  $('table.result, table.table-result').each((_,table)=>{
+    const $table=$(table);
+    const id=String($table.attr('id')||'');
+    const isEuro=/euro/i.test(id);
+    const rows=[];
+
+    $table.find('tr').each((rowIndex,tr)=>{
+      const cells=$(tr).find('th,td').map((__,el)=>$(el).text().replace(/\s+/g,' ').trim()).get();
+      if(cells.length) rows.push(cells);
+    });
+    if(rows.length<2) return;
+
+    const headers=rows[0].map(normalize);
+    const sailIdx=headers.findIndex(h=>h==='sail #' || /^sail/.test(h));
+    const crewIdx=headers.findIndex(h=>/crew|team|sailor|helm|skipper/.test(h));
+    if(sailIdx<0 || crewIdx<0) return;
+
+    const parsed=[];
+    for(let i=1;i<rows.length;i++){
+      const cells=rows[i];
+      const nat=extractCountryCode(cells[sailIdx]);
+      const name=cells[crewIdx]||'';
+      if(!nat) continue;
+
+      let rank=null;
+      if(isEuro) rank=rankNumber(cells[0]);
+      else rank=i; // SailTi overall rows are already in official finishing order.
+      if(!rank) continue;
+
+      parsed.push({rank,nat,name,cells});
+    }
+    const target=parsed.find(r=>athleteNameMatches(r.name,athlete));
+    if(!target) return;
+
+    const countries=[];
+    for(const r of parsed.slice().sort((a,b)=>a.rank-b.rank)){
+      if(!countries.includes(r.nat)) countries.push(r.nat);
+      if(r===target) break;
+    }
+
+    const candidate={
+      method:isEuro?'sailti-europe-table':'sailti-overall-table',
+      athlete:target.name.trim(),
+      result_general:target.rank,
+      country_code:target.nat,
+      result_country:countries.indexOf(target.nat)+1 || null,
+      rows_parsed:parsed.length,
+      countries_counted:countries.length,
+      confidence:'alta',
+      evidence:target.cells.join(' | '),
+      ranking_scope:isEuro?'europe':'overall'
+    };
+
+    let score=parsed.length;
+    if(!isEuro) score+=1000;
+    if(declared!==null && candidate.result_general===declared) score+=10000;
+
+    if(score>bestScore){
+      best=candidate;
+      bestScore=score;
+    }
+  });
+
+  return best;
+}
+
 function extractSailtiAjaxUrls(html, baseUrl){
   const urls=[];
   const patterns=[
@@ -277,9 +349,9 @@ async function analyzeSailtiDynamic(buffer, contentType, baseUrl, athlete, decla
   for(const ajaxUrl of ajaxUrls){
     try{
       const fetched=await safeFetch(ajaxUrl);
-      const doc=tableRowsFromHtml(fetched.buffer.toString('utf8'));
-      const analysis=analyzeStructuredTables(doc.tables,athlete,declaredResult);
-      if(analysis) candidates.push({analysis,ajaxUrl,tables:doc.tables.length});
+      const ajaxHtml=fetched.buffer.toString('utf8');
+      const analysis=analyzeSailtiHtml(ajaxHtml,athlete,declaredResult);
+      if(analysis) candidates.push({analysis,ajaxUrl});
     }catch{}
   }
   if(!candidates.length) return null;
