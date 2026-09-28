@@ -116,14 +116,6 @@
     const filter = btn.dataset.newsFilter;
     newsCards.forEach(card => card.hidden = filter !== 'all' && card.dataset.newsCategory !== filter);
   }));
-
-  // Club demo filtering
-  const clubRegion = document.querySelector('[data-club-region]');
-  clubRegion?.addEventListener('change', () => {
-    const region = clubRegion.value;
-    document.querySelectorAll('.club-card').forEach(card => {
-      card.hidden = region !== 'all' && card.dataset.region !== region;
-    });
   });
 })();
 
@@ -219,7 +211,7 @@
       ['Federação','Mesa da Assembleia Geral','Decisões, convocatórias e eleições','assembleia-geral.html'],
       ['Formação','Formação FPV','Certificação, treinadores e árbitros','formacao.html'],
       ['Formação','Curso de Treinadores de Vela — Grau II','Formação de treinadores · 2026','formacao-detalhe.html'],
-      ['Clubes','Clubes e entidades','Pesquisa de clubes por região','clubes.html'],
+      ['Clubes','Clubes e entidades','Pesquisa de clubes por Associação Regional','clubes.html'],
       ['Notícias','Notícias FPV','Atualidade da vela portuguesa','noticias.html'],
       ['Notícias','XXXVIII Campeonato de Portugal de Juniores e Absoluto','7 Jul 2026','artigo.html']
     ];
