@@ -4,6 +4,7 @@ const pdf = require('pdf-parse');
 const cheerio = require('cheerio');
 const dns = require('node:dns').promises;
 const net = require('node:net');
+const path = require('node:path');
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 12 * 1024 * 1024, files: 1 } });
@@ -20,7 +21,7 @@ app.use((req,res,next)=>{
   next();
 });
 
-app.get('/health',(req,res)=>res.json({ok:true,service:'fpv-results-analyzer',version:'0.1.0'}));
+app.get('/api/health',(req,res)=>res.json({ok:true,service:'fpv-results-analyzer',version:'0.1.0'}));
 
 function normalize(value=''){
   return String(value).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/\s+/g,' ').trim();
@@ -185,6 +186,31 @@ function analyzeText(text, athlete){
   };
 }
 
+async function maybeFollowEmbeddedResultSource(buffer, contentType, baseUrl){
+  if(contentType.includes('pdf')) return null;
+  const html=buffer.toString('utf8');
+  const $=cheerio.load(html);
+  const candidates=[];
+  $('a[href],iframe[src],embed[src],object[data]').each((_,el)=>{
+    const raw=$(el).attr('href')||$(el).attr('src')||$(el).attr('data');
+    if(!raw) return;
+    let absolute;
+    try { absolute=new URL(raw,baseUrl).toString(); } catch { return; }
+    const label=normalize($(el).text()+' '+raw);
+    if(/\.pdf(?:$|[?#])/i.test(absolute) || /result|classifica|ranking|final|overall/.test(label)) candidates.push(absolute);
+  });
+  const unique=[...new Set(candidates)].slice(0,8);
+  for(const candidate of unique){
+    try{
+      const fetched=await safeFetch(candidate);
+      if(fetched.contentType.includes('pdf') || /^%PDF-/.test(fetched.buffer.subarray(0,5).toString())){
+        return {...fetched, discoveredFrom:baseUrl};
+      }
+    }catch{}
+  }
+  return null;
+}
+
 async function analyzeBuffer(buffer, contentType, athlete, hintName=''){
   const isPdf=contentType.includes('pdf') || /^%PDF-/.test(buffer.subarray(0,5).toString()) || /\.pdf$/i.test(hintName);
   if(isPdf){
@@ -213,19 +239,30 @@ async function analyzeBuffer(buffer, contentType, athlete, hintName=''){
   };
 }
 
-app.post('/analyze-url',async(req,res)=>{
+app.post('/api/analyze-url',async(req,res)=>{
   try{
     const {url,athlete=''}=req.body||{};
     if(!url) return res.status(400).json({ok:false,error:'Indica o link oficial.'});
     const fetched=await safeFetch(url);
-    const result=await analyzeBuffer(fetched.buffer,fetched.contentType,athlete,fetched.finalUrl);
-    res.json({ok:true,source_url:fetched.finalUrl,...result});
+    let result=await analyzeBuffer(fetched.buffer,fetched.contentType,athlete,fetched.finalUrl);
+    let sourceUrl=fetched.finalUrl;
+    if((!result.analysis || result.manual_required) && !fetched.contentType.includes('pdf')){
+      const discovered=await maybeFollowEmbeddedResultSource(fetched.buffer,fetched.contentType,fetched.finalUrl);
+      if(discovered){
+        const pdfResult=await analyzeBuffer(discovered.buffer,discovered.contentType,athlete,discovered.finalUrl);
+        if(pdfResult.analysis){
+          result={...pdfResult, discovered_from:fetched.finalUrl};
+          sourceUrl=discovered.finalUrl;
+        }
+      }
+    }
+    res.json({ok:true,source_url:sourceUrl,...result});
   }catch(error){
     res.status(422).json({ok:false,error:error.message||'Não foi possível analisar a fonte.'});
   }
 });
 
-app.post('/analyze-pdf',upload.single('file'),async(req,res)=>{
+app.post('/api/analyze-pdf',upload.single('file'),async(req,res)=>{
   try{
     if(!req.file) return res.status(400).json({ok:false,error:'Seleciona um PDF.'});
     const type=(req.file.mimetype||'').toLowerCase();
@@ -240,6 +277,13 @@ app.post('/analyze-pdf',upload.single('file'),async(req,res)=>{
 app.use((err,req,res,next)=>{
   if(err?.code==='LIMIT_FILE_SIZE') return res.status(413).json({ok:false,error:'O PDF excede 12 MB.'});
   res.status(500).json({ok:false,error:'Erro interno do analisador.'});
+});
+
+const SITE_ROOT = path.resolve(__dirname, '..');
+app.use(express.static(SITE_ROOT, { extensions:['html'], maxAge:0, etag:true }));
+app.get('*',(req,res)=>{
+  if(req.path.startsWith('/api/')) return res.status(404).json({ok:false,error:'Endpoint não encontrado.'});
+  res.sendFile(path.join(SITE_ROOT,'index.html'));
 });
 
 app.listen(PORT,()=>console.log('FPV results analyzer listening on '+PORT));
