@@ -52,6 +52,9 @@
       cards
         .filter(card => card.dataset.region === association.region)
         .forEach(card => {
+          // Cards in the directory must never depend on scroll-reveal to become usable.
+          card.removeAttribute('data-reveal');
+          card.classList.add('visible');
           const firstTag = card.querySelector('.club-card-tags .tag');
           if (firstTag) {
             firstTag.textContent = association.code;
