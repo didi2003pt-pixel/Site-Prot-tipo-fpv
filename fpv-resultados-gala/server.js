@@ -471,18 +471,10 @@ function cleanText(value,max=500){
 function validEmail(value){
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value||'').trim());
 }
-function makeReference(){
-  const year=new Date().getFullYear();
-  const stamp=Date.now().toString(36).toUpperCase().slice(-5);
-  const rand=Math.random().toString(36).toUpperCase().slice(2,5);
-  return 'RI-'+year+'-'+stamp+rand;
-}
-
 app.post('/api/submit', submissionLimiter, async (req,res)=>{
   try{
     const webhook=process.env.SHEET_WEBHOOK_URL;
-    const webhookSecret=process.env.SHEET_WEBHOOK_SECRET;
-    if(!webhook || !webhookSecret){
+    if(!webhook){
       return res.status(503).json({ok:false,error:'A receção de submissões ainda não está ligada ao backoffice FPV.'});
     }
 
@@ -514,12 +506,10 @@ app.post('/api/submit', submissionLimiter, async (req,res)=>{
       analysis={ok:false,error:'Análise automática inconclusiva.'};
     }
 
-    const reference=makeReference();
     const payload={
-      secret:webhookSecret,
       action:'create_submission',
       record:{
-        id:reference,
+        id:'',
         submittedAt:new Date().toISOString(),
         email,
         startDate,
@@ -570,8 +560,104 @@ app.post('/api/submit', submissionLimiter, async (req,res)=>{
 
     res.status(201).json({
       ok:true,
-      reference,
+      reference: result.id || '',
       analysis: analysis?.analysis || null,
+      message:'Submissão recebida. A FPV irá rever a informação antes da validação.'
+    });
+  }catch(error){
+    res.status(500).json({ok:false,error:'Não foi possível concluir a submissão. Tenta novamente.'});
+  }
+});
+
+app.post('/api/submit-pdf', submissionLimiter, upload.single('file'), async (req,res)=>{
+  try{
+    const webhook=process.env.SHEET_WEBHOOK_URL;
+    if(!webhook){
+      return res.status(503).json({ok:false,error:'A receção de submissões ainda não está ligada ao backoffice FPV.'});
+    }
+    if(!req.file) return res.status(400).json({ok:false,error:'Seleciona um PDF.'});
+    const type=(req.file.mimetype||'').toLowerCase();
+    if(!type.includes('pdf') && !/\.pdf$/i.test(req.file.originalname||'')){
+      return res.status(400).json({ok:false,error:'O ficheiro tem de ser PDF.'});
+    }
+
+    const body=req.body||{};
+    if(cleanText(body.website,120)) return res.status(400).json({ok:false,error:'Submissão inválida.'});
+
+    const email=cleanText(body.email,180);
+    const athlete=cleanText(body.athlete,300);
+    const club=cleanText(body.club,300);
+    const declaredResult=cleanText(body.declaredResult,50);
+    const startDate=cleanText(body.startDate,20);
+    const endDate=cleanText(body.endDate,20);
+    const consent=String(body.consent).toLowerCase()==='true';
+
+    if(!validEmail(email) || !athlete || !club || !declaredResult || !startDate || !endDate || !consent){
+      return res.status(400).json({ok:false,error:'Confirma os campos obrigatórios antes de enviar.'});
+    }
+    if(endDate < startDate) return res.status(400).json({ok:false,error:'A data de fim não pode ser anterior à data de início.'});
+
+    let analysis=null;
+    try{
+      analysis=await analyzeBuffer(req.file.buffer,'application/pdf',athlete,req.file.originalname||'',declaredResult);
+    }catch{
+      analysis={analysis:null,manual_required:true,note:'Análise automática inconclusiva.'};
+    }
+
+    const payload={
+      action:'create_submission',
+      pdfBase64:req.file.buffer.toString('base64'),
+      pdfFileName:req.file.originalname||'resultado.pdf',
+      pdfMimeType:'application/pdf',
+      record:{
+        id:'',
+        submittedAt:new Date().toISOString(),
+        email,startDate,endDate,athlete,club,declaredResult,
+        sourceType:'PDF',
+        sourceUrl:'',
+        pdfDriveUrl:'',
+        detectedGeneral:analysis?.analysis?.result_general ?? '',
+        resultCountry:analysis?.analysis?.result_country ?? '',
+        countryCode:analysis?.analysis?.country_code ?? '',
+        participants:analysis?.analysis?.rows_parsed ?? '',
+        participantCountries:analysis?.analysis?.countries_counted ?? '',
+        className:'',
+        eventName:'',
+        location:'',
+        confidence:analysis?.analysis?.confidence ?? '',
+        analysisStatus:analysis?.analysis ? 'CONCLUÍDA' : 'INCONCLUSIVA',
+        fpvStatus:'PENDENTE',
+        notes:'',
+        validatedBy:'',
+        validatedAt:'',
+        emailSent:false,
+        emailAt:'',
+        emailError:''
+      }
+    };
+
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),20000);
+    let response;
+    try{
+      response=await fetch(webhook,{
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(payload),
+        signal:controller.signal,
+        redirect:'follow'
+      });
+    } finally { clearTimeout(timer); }
+
+    const text=await response.text();
+    let result={};
+    try{result=JSON.parse(text);}catch{}
+    if(!response.ok || result.ok===false) throw new Error('Falha ao guardar no backoffice.');
+
+    res.status(201).json({
+      ok:true,
+      reference:result.id||'',
+      analysis:analysis?.analysis||null,
       message:'Submissão recebida. A FPV irá rever a informação antes da validação.'
     });
   }catch(error){
