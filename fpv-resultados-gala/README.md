@@ -1,18 +1,48 @@
-# FPV Resultados Internacionais — Gala da Vela
+# FPV — Resultados Internacionais / Gala da Vela
 
-Aplicação autónoma para recolha, análise e validação de resultados internacionais.
+Aplicação autónoma para a Federação Portuguesa de Vela receber, analisar e validar resultados internacionais submetidos pelos velejadores.
 
-## Princípios
-- Independente do website/protótipo FPV.
-- Formulário público simples.
-- Análise assistida de SailTi/HTML/PDF.
-- Nunca valida automaticamente.
-- Google Sheet privada como backoffice V1.
-- Email apenas após validação pela FPV.
+## V1 em utilização
+A arquitetura escolhida para a urgência da Gala é:
 
-## Variáveis de ambiente
-- `SHEET_WEBHOOK_URL` — URL da web app Google Apps Script.
-- `APP_BASE_URL` — URL pública da aplicação.
-- `MAX_PDF_MB` — opcional, default 12.
+**Google Apps Script + Google Sheets + Google Drive**
 
-Sem `SHEET_WEBHOOK_URL`, a aplicação funciona em modo de demonstração para análise mas não aceita submissões finais.
+Não depende do website FPV nem do protótipo em desenvolvimento.
+
+## Estrutura
+
+```
+fpv-resultados-gala/
+├── app/
+│   ├── Code.gs
+│   └── Index.html
+├── data/
+│   └── clubes-fpv.json
+├── docs/
+│   ├── ARQUITETURA.md
+│   ├── INSTALACAO.md
+│   └── TESTES.md
+└── README.md
+```
+
+## Fluxo
+1. Velejador abre o link público.
+2. Preenche os dados essenciais.
+3. Indica link oficial ou PDF.
+4. O sistema tenta analisar a fonte.
+5. A submissão entra na Sheet como `PENDENTE`.
+6. A FPV revê e valida.
+7. Ao mudar para `VALIDADO`, o velejador recebe um email automático.
+8. O envio do email fica registado para impedir duplicação.
+
+## Fontes
+A V1 já inclui suporte específico para o padrão SailTi testado durante o desenvolvimento. Outras fontes podem entrar como análise inconclusiva e ser revistas manualmente.
+
+## Instalação
+Ver `docs/INSTALACAO.md`.
+
+## Testes antes da divulgação
+Ver `docs/TESTES.md`.
+
+## Princípio fundamental
+**Nenhum resultado é automaticamente validado.**
