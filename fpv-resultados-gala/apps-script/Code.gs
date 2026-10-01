@@ -135,6 +135,10 @@ function submitResult(payload) {
     const sourceUrl = clean_(payload.sourceUrl);
     const consent = payload.consent === true;
 
+    enforceRateLimit_(email);
+    if (CLUBS.indexOf(club) < 0) throw new Error('Seleciona um clube válido da lista FPV.');
+    if (sourceUrl) validatePublicUrl_(sourceUrl);
+
     if (!validEmail_(email) || !startDate || !endDate || !athlete || !club || !declared || !consent) {
       throw new Error('Confirma todos os campos obrigatórios.');
     }
@@ -298,7 +302,7 @@ function setup() {
 }
 
 function analyzeUrl_(url, athlete, declaredResult) {
-  if (!/^https?:\/\//i.test(url)) throw new Error('O link oficial deve começar por http:// ou https://.');
+  validatePublicUrl_(url);
   const response = UrlFetchApp.fetch(url, {
     muteHttpExceptions:true,
     followRedirects:true,
@@ -479,6 +483,36 @@ function normalize_(value) {
     .replace(/[áàâã]/g,'a').replace(/[éê]/g,'e').replace(/í/g,'i')
     .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c')
     .replace(/[^a-z0-9]+/g,' ').trim();
+}
+
+
+function enforceRateLimit_(email) {
+  const cache = CacheService.getScriptCache();
+  const key = 'rate_' + Utilities.base64EncodeWebSafe(
+    Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(email || '').toLowerCase())
+  ).slice(0, 32);
+  const current = Number(cache.get(key) || 0);
+  if (current >= 5) {
+    throw new Error('Foram efetuadas várias submissões em pouco tempo. Tenta novamente dentro de alguns minutos.');
+  }
+  cache.put(key, String(current + 1), 15 * 60);
+}
+
+function validatePublicUrl_(url) {
+  const raw = String(url || '').trim();
+  if (!/^https?:\/\//i.test(raw)) throw new Error('O link oficial deve começar por http:// ou https://.');
+  const m = raw.match(/^https?:\/\/([^\/:?#]+)/i);
+  const host = String(m && m[1] || '').toLowerCase();
+  if (!host) throw new Error('O link oficial não é válido.');
+  if (
+    host === 'localhost' || host.endsWith('.local') ||
+    /^127\./.test(host) || /^10\./.test(host) || /^192\.168\./.test(host) ||
+    /^169\.254\./.test(host) || /^0\./.test(host) ||
+    /^172\.(1[6-9]|2\d|3[01])\./.test(host) ||
+    host === '::1' || host === '[::1]'
+  ) {
+    throw new Error('O link oficial tem de ser público.');
+  }
 }
 
 function nextReference_(sheet) {
