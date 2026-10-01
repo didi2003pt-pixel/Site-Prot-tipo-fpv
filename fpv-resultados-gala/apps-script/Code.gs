@@ -2,93 +2,213 @@ const SPREADSHEET_ID = '1dsZUfvE32-QHOiLWw_oV9HVndptgihclEM2ZZQYMa18';
 const SHEET_NAME = 'Submissões';
 const PDF_FOLDER_ID = '1no4n9kFXx9HjXY3N2H87b7ebzbRfsael';
 
+const CLUBS = [
+  "Alhandra Sporting Club",
+  "Angra Iate Clube",
+  "Associação Náutica da Gafanha da Encarnação",
+  "Associação Náutica da Madeira",
+  "Associação Náutica da Torreira",
+  "Associação Náutica do Seixal",
+  "Associação Naval de Lisboa",
+  "Associação Naval do Guadiana",
+  "AVELA - Associação Aveirense de Vela de Cruzeiro",
+  "Beira Mar Náutica — Associação Desportiva",
+  "Capable Planet Clube Náutico",
+  "Centro Náutico de São Martinho do Porto",
+  "Centro Treino Mar",
+  "CIMAV - Clube Internacional da Marina de Vilamoura",
+  "Clube Amigos da Vela de Cruzeiro e do Mar",
+  "Clube de Caça e Pesca do Alto Douro",
+  "Clube de Vela Atlântico",
+  "Clube de Vela Costa Nova",
+  "Clube de Vela de Lagos",
+  "Clube de Vela de Portugal",
+  "CLUBE DE VELA DE VIANA DO CASTELO",
+  "Clube de Vela do Barreiro",
+  "Clube de vela do Sado",
+  "Clube de Vela e Canoagem de Montargil",
+  "Clube Desportivo de Paço de Arcos",
+  "Clube do Mar Costa do Sol",
+  "Clube do Mar de Coimbra - Associação para o Desenvolvimento da Vela",
+  "Clube Dom Pedro",
+  "Clube dos Oficiais da Marinha Mercante",
+  "Clube Fluvial Vilacondense",
+  "Clube Força 5",
+  "Clube Náutico Boca da Barra",
+  "Clube Náutico da Figueira da Foz",
+  "Clube Náutico da Lagoa",
+  "Clube Náutico das Lajes do Pico",
+  "Clube Náutico de Almada",
+  "Clube Náutico de Angra do Heroísmo",
+  "Clube Náutico de Caldas de Aregos",
+  "Clube Náutico de Sines",
+  "Clube Náutico de Tavira",
+  "Clube Náutico dos Oficiais e Cadetes da Armada",
+  "Clube Naval da Calheta",
+  "Clube Naval da Fuzeta",
+  "Clube Naval da Horta",
+  "Clube Naval da Ilha Graciosa",
+  "Clube Naval da Madalena",
+  "Clube Naval da Nazaré",
+  "Clube Naval da Povoação",
+  "Clube Naval da Praia da Vitória",
+  "Clube Naval de Cascais",
+  "Clube Naval de Lajes das Flores",
+  "Clube Naval de Leça",
+  "Clube Naval de Lisboa",
+  "Clube Naval de Peniche",
+  "Clube Naval de Ponta Delgada",
+  "Clube Naval de Portimão",
+  "Clube Naval de Santa Maria",
+  "Clube Naval de São João do Porto",
+  "Clube Naval de São Mateus da Calheta",
+  "Clube Naval de São Roque do Pico",
+  "Clube Naval de Sesimbra",
+  "Clube Naval de Velas",
+  "Clube Naval de Vila Franca do Campo",
+  "Clube Naval do Funchal",
+  "Clube Naval do Porto Santo",
+  "Clube Naval do Seixal",
+  "Clube Naval Povoense",
+  "Clube Naval Setubalense",
+  "Clube Nortada Aventura",
+  "Clube Sportivo de Pedrouços",
+  "Clube Turismo da Madeira",
+  "Clube We Do Sailing / BBDOURO",
+  "Douro Gaia Sport Club",
+  "Escola Nacional de Vela Adaptada",
+  "Fórum Esposendense",
+  "Foz do Ave Sailing Team",
+  "Ginásio Clube Naval de Faro",
+  "Grupo Naval de Olhão",
+  "Iate Clube da Marina de Portimão",
+  "Iate Clube Santa Cruz",
+  "Lisbon International Sailing Club",
+  "Mentor- Academia de Desenvolvimento de Competências Pessoais e Desportivas",
+  "NÁUTICA DESPORTIVA OVARENSE - NADO",
+  "Náutico Clube Boa Esperança",
+  "Seawoman — Associação para a Promoção da Mulher através do Desporto e Atividades Náuticas",
+  "Sharpie Club Portugal",
+  "Sport Algés e Dafundo",
+  "Sport Club do Porto",
+  "Sporting Clube de Aveiro",
+  "União Desportiva Vilafranquense",
+  "Vela Solidária",
+  "Yate Clube do Porto"
+];
+
 const COL = {
-  ID: 1,
-  SUBMITTED_AT: 2,
-  EMAIL: 3,
-  START_DATE: 4,
-  END_DATE: 5,
-  ATHLETE: 6,
-  CLUB: 7,
-  DECLARED_RESULT: 8,
-  SOURCE_TYPE: 9,
-  SOURCE_URL: 10,
-  PDF_URL: 11,
-  DETECTED_GENERAL: 12,
-  RESULT_COUNTRY: 13,
-  COUNTRY_CODE: 14,
-  PARTICIPANTS: 15,
-  PARTICIPANT_COUNTRIES: 16,
-  CLASS: 17,
-  EVENT: 18,
-  LOCATION: 19,
-  CONFIDENCE: 20,
-  ANALYSIS_STATUS: 21,
-  FPV_STATUS: 22,
-  NOTES: 23,
-  VALIDATED_BY: 24,
-  VALIDATED_AT: 25,
-  EMAIL_SENT: 26,
-  EMAIL_AT: 27,
-  EMAIL_ERROR: 28
+  ID:1,SUBMITTED_AT:2,EMAIL:3,START_DATE:4,END_DATE:5,ATHLETE:6,CLUB:7,
+  DECLARED_RESULT:8,SOURCE_TYPE:9,SOURCE_URL:10,PDF_URL:11,DETECTED_GENERAL:12,
+  RESULT_COUNTRY:13,COUNTRY_CODE:14,PARTICIPANTS:15,PARTICIPANT_COUNTRIES:16,
+  CLASS:17,EVENT:18,LOCATION:19,CONFIDENCE:20,ANALYSIS_STATUS:21,FPV_STATUS:22,
+  NOTES:23,VALIDATED_BY:24,VALIDATED_AT:25,EMAIL_SENT:26,EMAIL_AT:27,EMAIL_ERROR:28
 };
 
-function doPost(e) {
+function doGet() {
+  return HtmlService.createHtmlOutputFromFile('Index')
+    .setTitle('FPV — Resultados Internacionais')
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+}
+
+function getClubs() {
+  return CLUBS.slice();
+}
+
+function analyzeUrlServer(url, athlete, declaredResult) {
+  return analyzeUrl_(String(url || ''), String(athlete || ''), String(declaredResult || ''));
+}
+
+function submitResult(payload) {
   const lock = LockService.getScriptLock();
   lock.waitLock(15000);
   try {
-    const payload = JSON.parse((e && e.postData && e.postData.contents) || '{}');
-    if (payload.action !== 'create_submission' || !payload.record) {
-      return json_({ ok: false, error: 'Pedido inválido.' });
-    }
+    payload = payload || {};
+    if (clean_(payload.website)) throw new Error('Submissão inválida.');
 
-    const r = payload.record;
+    const email = clean_(payload.email);
+    const startDate = clean_(payload.startDate);
+    const endDate = clean_(payload.endDate);
+    const athlete = clean_(payload.athlete);
+    const club = clean_(payload.club);
+    const declared = clean_(payload.declaredResult);
+    const sourceUrl = clean_(payload.sourceUrl);
+    const consent = payload.consent === true;
+
+    if (!validEmail_(email) || !startDate || !endDate || !athlete || !club || !declared || !consent) {
+      throw new Error('Confirma todos os campos obrigatórios.');
+    }
+    if (endDate < startDate) throw new Error('A data de fim não pode ser anterior à data de início.');
+    if (!sourceUrl && !payload.pdfBase64) throw new Error('Indica um link oficial ou carrega um PDF.');
+
     const sheet = SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME);
-    if (!sheet) return json_({ ok: false, error: 'Folha não encontrada.' });
+    if (!sheet) throw new Error('Folha de submissões indisponível.');
 
-    const duplicate = findDuplicate_(sheet, r);
-    if (duplicate) {
-      return json_({ ok: false, error: 'Esta submissão parece já ter sido recebida.', duplicateId: duplicate });
-    }
+    const dup = findDuplicate_(sheet, email, athlete, declared, sourceUrl);
+    if (dup) throw new Error('Esta submissão parece já ter sido recebida. Referência: ' + dup);
 
     const id = nextReference_(sheet);
     let pdfUrl = '';
+    let analysis = null;
+    let sourceType = sourceUrl ? 'LINK' : 'PDF';
 
-    if (payload.pdfBase64) {
-      const bytes = Utilities.base64Decode(payload.pdfBase64);
-      const blob = Utilities.newBlob(
-        bytes,
-        payload.pdfMimeType || 'application/pdf',
-        safeFileName_(payload.pdfFileName || (id + '.pdf'))
-      );
-      const folder = DriveApp.getFolderById(PDF_FOLDER_ID);
-      const file = folder.createFile(blob);
-      file.setDescription('Resultado internacional ' + id + ' — recebido através da plataforma FPV.');
-      pdfUrl = file.getUrl();
+    if (sourceUrl) {
+      try {
+        analysis = analyzeUrl_(sourceUrl, athlete, declared);
+      } catch (err) {
+        analysis = { ok:false, manualRequired:true, note:'Análise automática inconclusiva.' };
+      }
     }
 
+    if (payload.pdfBase64) {
+      const bytes = Utilities.base64Decode(String(payload.pdfBase64));
+      if (bytes.length > 12 * 1024 * 1024) throw new Error('O PDF excede 12 MB.');
+      const blob = Utilities.newBlob(bytes, 'application/pdf', safeFileName_(payload.pdfName || (id + '.pdf')));
+      const file = DriveApp.getFolderById(PDF_FOLDER_ID).createFile(blob);
+      file.setDescription('Resultado internacional ' + id + ' — recebido pela plataforma FPV.');
+      pdfUrl = file.getUrl();
+
+      if (!analysis && payload.clientAnalysis && payload.clientAnalysis.found) {
+        analysis = {
+          ok:true,
+          manualRequired:false,
+          sourceType:'pdf-client',
+          analysis:{
+            athlete:clean_(payload.clientAnalysis.athlete || athlete),
+            resultGeneral:value_(payload.clientAnalysis.general),
+            resultCountry:value_(payload.clientAnalysis.countryResult),
+            countryCode:clean_(payload.clientAnalysis.country),
+            participants:value_(payload.clientAnalysis.rows),
+            participantCountries:value_(payload.clientAnalysis.countriesCounted),
+            confidence:clean_(payload.clientAnalysis.confidence || 'média')
+          }
+        };
+      }
+    }
+
+    const a = analysis && analysis.analysis ? analysis.analysis : {};
     const row = [
       id,
-      new Date(r.submittedAt || new Date().toISOString()),
-      clean_(r.email),
-      parseDate_(r.startDate),
-      parseDate_(r.endDate),
-      clean_(r.athlete),
-      clean_(r.club),
-      clean_(r.declaredResult),
-      clean_(r.sourceType),
-      clean_(r.sourceUrl),
-      pdfUrl || clean_(r.pdfDriveUrl),
-      value_(r.detectedGeneral),
-      value_(r.resultCountry),
-      clean_(r.countryCode),
-      value_(r.participants),
-      value_(r.participantCountries),
-      clean_(r.className),
-      clean_(r.eventName),
-      clean_(r.location),
-      clean_(r.confidence),
-      clean_(r.analysisStatus || 'NÃO ANALISADO'),
+      new Date(),
+      email,
+      parseDate_(startDate),
+      parseDate_(endDate),
+      athlete,
+      club,
+      declared,
+      sourceType,
+      sourceUrl,
+      pdfUrl,
+      value_(a.resultGeneral),
+      value_(a.resultCountry),
+      clean_(a.countryCode),
+      value_(a.participants),
+      value_(a.participantCountries),
+      clean_(a.className),
+      clean_(a.eventName),
+      clean_(a.location),
+      clean_(a.confidence),
+      analysis && analysis.analysis ? 'CONCLUÍDA' : 'INCONCLUSIVA',
       'PENDENTE',
       '',
       '',
@@ -99,13 +219,16 @@ function doPost(e) {
     ];
 
     sheet.appendRow(row);
-    const rowNumber = sheet.getLastRow();
-    sheet.getRange(rowNumber, COL.SUBMITTED_AT).setNumberFormat('dd/mm/yyyy hh:mm');
-    sheet.getRange(rowNumber, COL.START_DATE, 1, 2).setNumberFormat('dd/mm/yyyy');
+    const rn = sheet.getLastRow();
+    sheet.getRange(rn, COL.SUBMITTED_AT).setNumberFormat('dd/mm/yyyy hh:mm');
+    sheet.getRange(rn, COL.START_DATE, 1, 2).setNumberFormat('dd/mm/yyyy');
 
-    return json_({ ok: true, id, pdfUrl, row: rowNumber });
-  } catch (err) {
-    return json_({ ok: false, error: 'Não foi possível guardar a submissão.' });
+    return {
+      ok:true,
+      reference:id,
+      analysis:analysis && analysis.analysis ? analysis.analysis : null,
+      message:'Submissão recebida.'
+    };
   } finally {
     lock.releaseLock();
   }
@@ -114,15 +237,11 @@ function doPost(e) {
 function onEditValidation(e) {
   if (!e || !e.range) return;
   const sheet = e.range.getSheet();
-  if (sheet.getName() !== SHEET_NAME) return;
-  if (e.range.getColumn() !== COL.FPV_STATUS || e.range.getRow() < 2) return;
-
-  const status = String(e.value || '').trim().toUpperCase();
-  if (status !== 'VALIDADO') return;
+  if (sheet.getName() !== SHEET_NAME || e.range.getColumn() !== COL.FPV_STATUS || e.range.getRow() < 2) return;
+  if (String(e.value || '').toUpperCase() !== 'VALIDADO') return;
 
   const row = e.range.getRow();
-  const emailSent = sheet.getRange(row, COL.EMAIL_SENT).getValue();
-  if (emailSent === true) return;
+  if (sheet.getRange(row, COL.EMAIL_SENT).getValue() === true) return;
 
   const email = String(sheet.getRange(row, COL.EMAIL).getValue() || '').trim();
   const athlete = String(sheet.getRange(row, COL.ATHLETE).getValue() || '').trim();
@@ -136,13 +255,11 @@ function onEditValidation(e) {
     return;
   }
 
-  const validator = Session.getActiveUser().getEmail() || 'FPV';
   const now = new Date();
-
-  sheet.getRange(row, COL.VALIDATED_BY).setValue(validator);
+  sheet.getRange(row, COL.VALIDATED_BY).setValue(Session.getActiveUser().getEmail() || 'FPV');
   sheet.getRange(row, COL.VALIDATED_AT).setValue(now).setNumberFormat('dd/mm/yyyy hh:mm');
 
-  const lines = [
+  const body = [
     'Olá ' + (athlete || 'velejador/a') + ',',
     '',
     'O resultado internacional que submeteste à Federação Portuguesa de Vela foi revisto e validado.',
@@ -155,13 +272,13 @@ function onEditValidation(e) {
     'Obrigado por contribuíres para mantermos atualizada a informação sobre a participação portuguesa em competições internacionais.',
     '',
     'Federação Portuguesa de Vela'
-  ].filter(Boolean);
+  ].filter(Boolean).join('\n');
 
   try {
     MailApp.sendEmail({
       to: email,
       subject: 'FPV — Resultado internacional validado',
-      body: lines.join('\n'),
+      body: body,
       name: 'Federação Portuguesa de Vela'
     });
     sheet.getRange(row, COL.EMAIL_SENT).setValue(true);
@@ -173,15 +290,195 @@ function onEditValidation(e) {
 }
 
 function setup() {
-  const triggers = ScriptApp.getProjectTriggers();
-  const exists = triggers.some(t => t.getHandlerFunction() === 'onEditValidation');
+  const exists = ScriptApp.getProjectTriggers().some(t => t.getHandlerFunction() === 'onEditValidation');
   if (!exists) {
-    ScriptApp.newTrigger('onEditValidation')
-      .forSpreadsheet(SPREADSHEET_ID)
-      .onEdit()
-      .create();
+    ScriptApp.newTrigger('onEditValidation').forSpreadsheet(SPREADSHEET_ID).onEdit().create();
   }
   return 'Configuração concluída.';
+}
+
+function analyzeUrl_(url, athlete, declaredResult) {
+  if (!/^https?:\/\//i.test(url)) throw new Error('O link oficial deve começar por http:// ou https://.');
+  const response = UrlFetchApp.fetch(url, {
+    muteHttpExceptions:true,
+    followRedirects:true,
+    validateHttpsCertificates:true,
+    headers:{'User-Agent':'FPV-Resultados/1.0'}
+  });
+  if (response.getResponseCode() < 200 || response.getResponseCode() >= 400) {
+    throw new Error('A fonte respondeu com HTTP ' + response.getResponseCode() + '.');
+  }
+
+  const contentType = String(response.getHeaders()['Content-Type'] || response.getHeaders()['content-type'] || '').toLowerCase();
+  if (contentType.indexOf('pdf') >= 0) {
+    return { ok:true, manualRequired:true, sourceType:'pdf-url', note:'PDF acessível. Requer validação manual nesta versão.' };
+  }
+
+  const html = response.getContentText();
+  const ajaxUrls = extractSailtiAjaxUrls_(html, url);
+  if (ajaxUrls.length) {
+    const candidates = [];
+    ajaxUrls.forEach(ajaxUrl => {
+      try {
+        const r = UrlFetchApp.fetch(ajaxUrl, {muteHttpExceptions:true, followRedirects:true});
+        if (r.getResponseCode() >= 200 && r.getResponseCode() < 400) {
+          const parsed = parseSailtiHtml_(r.getContentText(), athlete, declaredResult);
+          if (parsed) candidates.push(parsed);
+        }
+      } catch (ignore) {}
+    });
+
+    if (candidates.length) {
+      const declared = number_(declaredResult);
+      candidates.sort((a,b) => {
+        const am = declared && a.resultGeneral === declared ? 1 : 0;
+        const bm = declared && b.resultGeneral === declared ? 1 : 0;
+        if (am !== bm) return bm - am;
+        if (a.scope !== b.scope) return a.scope === 'overall' ? -1 : 1;
+        return b.participants - a.participants;
+      });
+      const c = candidates[0];
+      return {
+        ok:true,
+        manualRequired:false,
+        sourceType:'sailti',
+        analysis:c,
+        note:'Classificação dinâmica SailTi identificada.'
+      };
+    }
+  }
+
+  return { ok:true, manualRequired:true, sourceType:'html', note:'Página acessível, mas sem classificação estruturada reconhecida automaticamente.' };
+}
+
+function extractSailtiAjaxUrls_(html, baseUrl) {
+  const urls = [];
+  const patterns = [
+    /url\s*:\s*['"]([^'"]*resultsajax[^'"]*)['"]/gi,
+    /['"]([^'"]*\/resultsajax\?[^'"]+)['"]/gi
+  ];
+  patterns.forEach(re => {
+    let m;
+    while ((m = re.exec(html))) {
+      const raw = String(m[1] || '').replace(/&amp;/g,'&');
+      try { urls.push(resolveUrl_(baseUrl, raw)); } catch (ignore) {}
+    }
+  });
+  return [...new Set(urls)].slice(0,20);
+}
+
+function parseSailtiHtml_(html, athlete, declaredResult) {
+  const tables = html.match(/<table\b[\s\S]*?<\/table>/gi) || [];
+  const candidates = [];
+  tables.forEach(table => {
+    const id = (table.match(/id=["']([^"']*)["']/i) || [,''])[1];
+    if (!/myTable/i.test(id)) return;
+    const scope = /euro/i.test(id) ? 'europe' : 'overall';
+
+    const rows = table.match(/<tr\b[\s\S]*?<\/tr>/gi) || [];
+    if (rows.length < 2) return;
+    const headers = cells_(rows[0]).map(normalize_);
+    const sailIdx = headers.findIndex(h => /^sail/.test(h));
+    const crewIdx = headers.findIndex(h => /crew|team|sailor|helm|skipper/.test(h));
+    if (sailIdx < 0 || crewIdx < 0) return;
+
+    const parsed = [];
+    for (let i=1;i<rows.length;i++) {
+      const cells = cells_(rows[i]);
+      const country = countryCode_(cells[sailIdx] || '');
+      const crew = cells[crewIdx] || '';
+      if (!country) continue;
+      const rank = scope === 'overall' ? i : number_(cells[0]);
+      if (!rank) continue;
+      parsed.push({rank,country,crew,cells});
+    }
+
+    const target = parsed.find(r => athleteMatches_(r.crew, athlete));
+    if (!target) return;
+
+    const seen = [];
+    parsed.slice().sort((a,b)=>a.rank-b.rank).some(r => {
+      if (seen.indexOf(r.country) < 0) seen.push(r.country);
+      return r === target;
+    });
+
+    candidates.push({
+      athlete: target.crew,
+      resultGeneral: target.rank,
+      resultCountry: seen.indexOf(target.country) + 1,
+      countryCode: target.country,
+      participants: parsed.length,
+      participantCountries: seen.length,
+      confidence:'alta',
+      scope:scope
+    });
+  });
+
+  if (!candidates.length) return null;
+  const declared = number_(declaredResult);
+  candidates.sort((a,b) => {
+    const am = declared && a.resultGeneral === declared ? 1 : 0;
+    const bm = declared && b.resultGeneral === declared ? 1 : 0;
+    if (am !== bm) return bm - am;
+    if (a.scope !== b.scope) return a.scope === 'overall' ? -1 : 1;
+    return b.participants - a.participants;
+  });
+  return candidates[0];
+}
+
+function cells_(rowHtml) {
+  const out = [];
+  const re = /<(?:td|th)\b[^>]*>([\s\S]*?)<\/(?:td|th)>/gi;
+  let m;
+  while ((m = re.exec(rowHtml))) {
+    out.push(stripHtml_(m[1]));
+  }
+  return out;
+}
+
+function stripHtml_(s) {
+  return String(s || '')
+    .replace(/<br\s*\/?\s*>/gi,' ')
+    .replace(/<[^>]+>/g,' ')
+    .replace(/&nbsp;/gi,' ')
+    .replace(/&amp;/gi,'&')
+    .replace(/&quot;/gi,'"')
+    .replace(/&#39;/gi,"'")
+    .replace(/\s+/g,' ')
+    .trim();
+}
+
+function resolveUrl_(base, rel) {
+  if (/^https?:\/\//i.test(rel)) return rel;
+  const root = String(base).match(/^(https?:\/\/[^\/]+)/i);
+  if (!root) throw new Error('URL base inválido.');
+  if (rel.charAt(0) === '/') return root[1] + rel;
+  const dir = String(base).replace(/[#?].*$/,'').replace(/\/[^\/]*$/,'/');
+  return dir + rel;
+}
+
+function athleteMatches_(name, athlete) {
+  const hay = normalize_(name);
+  const tokens = normalize_(athlete).split(' ').filter(t => t.length > 1);
+  return tokens.length > 0 && tokens.every(t => hay.indexOf(t) >= 0);
+}
+
+function countryCode_(value) {
+  const exclusions = {BFD:1,DNF:1,DNS:1,DSQ:1,DNC:1,RET:1,OCS:1,UFD:1,DPI:1,RDG:1,SCP:1,DNE:1};
+  const matches = String(value || '').toUpperCase().match(/\b[A-Z]{3}\b/g) || [];
+  return matches.find(x => !exclusions[x]) || '';
+}
+
+function number_(value) {
+  const m = String(value || '').match(/\d{1,4}/);
+  return m ? Number(m[0]) : null;
+}
+
+function normalize_(value) {
+  return String(value || '').toLowerCase()
+    .replace(/[áàâã]/g,'a').replace(/[éê]/g,'e').replace(/í/g,'i')
+    .replace(/[óôõ]/g,'o').replace(/ú/g,'u').replace(/ç/g,'c')
+    .replace(/[^a-z0-9]+/g,' ').trim();
 }
 
 function nextReference_(sheet) {
@@ -189,57 +486,36 @@ function nextReference_(sheet) {
   const lastRow = sheet.getLastRow();
   let max = 0;
   if (lastRow >= 2) {
-    const ids = sheet.getRange(2, COL.ID, lastRow - 1, 1).getDisplayValues().flat();
-    ids.forEach(id => {
+    sheet.getRange(2, COL.ID, lastRow - 1, 1).getDisplayValues().flat().forEach(id => {
       const m = String(id).match(new RegExp('^RI-' + year + '-(\\d{4})$'));
       if (m) max = Math.max(max, Number(m[1]));
     });
   }
-  return 'RI-' + year + '-' + String(max + 1).padStart(4, '0');
+  return 'RI-' + year + '-' + String(max + 1).padStart(4,'0');
 }
 
-function findDuplicate_(sheet, r) {
+function findDuplicate_(sheet, email, athlete, declared, sourceUrl) {
   const lastRow = sheet.getLastRow();
   if (lastRow < 2) return '';
   const start = Math.max(2, lastRow - 199);
-  const values = sheet.getRange(start, 1, lastRow - start + 1, 10).getDisplayValues();
-  const email = clean_(r.email).toLowerCase();
-  const athlete = clean_(r.athlete).toLowerCase();
-  const declared = clean_(r.declaredResult).toLowerCase();
-  const source = clean_(r.sourceUrl).toLowerCase();
-
-  for (let i = values.length - 1; i >= 0; i--) {
-    const row = values[i];
+  const vals = sheet.getRange(start,1,lastRow-start+1,10).getDisplayValues();
+  for (let i=vals.length-1;i>=0;i--) {
+    const r=vals[i];
     if (
-      String(row[2] || '').toLowerCase() === email &&
-      String(row[5] || '').toLowerCase() === athlete &&
-      String(row[7] || '').toLowerCase() === declared &&
-      String(row[9] || '').toLowerCase() === source
-    ) return row[0] || '';
+      String(r[2]||'').toLowerCase() === email.toLowerCase() &&
+      String(r[5]||'').toLowerCase() === athlete.toLowerCase() &&
+      String(r[7]||'').toLowerCase() === declared.toLowerCase() &&
+      String(r[9]||'').toLowerCase() === sourceUrl.toLowerCase()
+    ) return r[0] || '';
   }
   return '';
 }
 
 function parseDate_(value) {
-  if (!value) return '';
-  const d = new Date(value + 'T12:00:00');
+  const d = new Date(String(value) + 'T12:00:00');
   return isNaN(d.getTime()) ? '' : d;
 }
-
-function clean_(value) {
-  return String(value == null ? '' : value).replace(/[<>]/g, '').trim().slice(0, 2000);
-}
-
-function value_(value) {
-  return value == null ? '' : value;
-}
-
-function safeFileName_(name) {
-  return String(name || 'resultado.pdf').replace(/[^a-zA-Z0-9._()\- áàâãéêíóôõúç]/g, '_').slice(0, 160);
-}
-
-function json_(obj) {
-  return ContentService
-    .createTextOutput(JSON.stringify(obj))
-    .setMimeType(ContentService.MimeType.JSON);
-}
+function validEmail_(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(v||'')); }
+function clean_(v) { return String(v == null ? '' : v).replace(/[<>]/g,'').trim().slice(0,2000); }
+function value_(v) { return v == null ? '' : v; }
+function safeFileName_(name) { return String(name||'resultado.pdf').replace(/[^a-zA-Z0-9._()\- áàâãéêíóôõúç]/g,'_').slice(0,160); }
