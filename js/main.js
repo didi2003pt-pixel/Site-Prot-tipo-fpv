@@ -230,3 +230,75 @@
     if(input){input.value=btn.dataset.suggestion; input.dispatchEvent(new Event('input',{bubbles:true}));}
   }));
 })();
+
+
+// FPV footer ecosystem — current fpvela.pt parity
+(() => {
+  const footer = document.querySelector('.site-footer');
+  if (!footer || footer.querySelector('.fpv-supporters')) return;
+
+  const svgIcons = {
+    Facebook: '<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M13.6 21v-8h2.8l.4-3h-3.2V8.1c0-.9.3-1.5 1.6-1.5H17V4c-.3 0-1.4-.1-2.6-.1-2.7 0-4.5 1.6-4.5 4.5V10H7v3h2.9v8h3.7Z"/></svg>',
+    X: '<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M18.9 2h3.7l-8.1 9.2L24 22h-7.4l-5.8-7.6L4.2 22H.5l8.5-9.7L0 2h7.6l5.2 6.9L18.9 2Zm-1.3 18.1h2L6.5 3.8H4.4l13.2 16.3Z"/></svg>',
+    YouTube: '<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12 31 31 0 0 0 1 16.8a3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8ZM9.7 15.3V8.7L15.8 12l-6.1 3.3Z"/></svg>'
+  };
+  const socialUrls = {
+    Facebook: 'https://www.facebook.com/Federacaoportuguesadevela/',
+    X: 'https://x.com/fp_vela',
+    YouTube: 'https://www.youtube.com/channel/UCiWY5kshidF3N0tqkukSu_w'
+  };
+  footer.querySelectorAll('.footer-social a[aria-label]').forEach(a => {
+    const name = a.getAttribute('aria-label');
+    if (!svgIcons[name]) return;
+    a.href = socialUrls[name];
+    a.target = '_blank';
+    a.rel = 'noopener noreferrer';
+    a.innerHTML = svgIcons[name];
+  });
+
+  const logo = (pos, label) =>
+    '<span class="fpv-logo-mark" aria-hidden="true" style="background-position:center ' + pos + 'px"></span><span class="sr-only">' + label + '</span>';
+  const ext = (href, pos, label, cls='') =>
+    '<a class="fpv-support-link ' + cls + '" href="' + href + '" target="_blank" rel="noopener noreferrer" aria-label="' + label + '">' + logo(pos, label) + '</a>';
+
+  const section = document.createElement('section');
+  section.className = 'fpv-supporters';
+  section.setAttribute('aria-label', 'Entidades, patrocinadores e parcerias');
+  section.innerHTML = `
+    <div class="container fpv-supporters-inner">
+      <div class="fpv-institutional-logos" aria-label="Entidades institucionais">
+        ${ext('https://ipdj.gov.pt/', 0, 'Instituto Português do Desporto e Juventude')}
+        ${ext('https://comiteolimpicoportugal.pt/', -75, 'Comité Olímpico de Portugal')}
+        ${ext('https://paralimpicos.pt/', -150, 'Comité Paralímpico de Portugal')}
+        ${ext('https://ipdj.gov.pt/pt/plano-nacional-de-etica-no-desporto-pned', -225, 'Plano Nacional de Ética no Desporto', 'fpv-support-link--wide')}
+        ${ext('https://www.sailing.org/', -300, 'World Sailing')}
+        ${ext('https://eurosaf.org/', -375, 'EUROSAF')}
+        ${ext('https://orc.org/', -450, 'Offshore Racing Congress')}
+      </div>
+
+      <div class="fpv-cofunded" aria-label="Cofinanciamento">
+        <span class="fpv-logo-mark fpv-logo-mark--funding" aria-hidden="true" style="background-position:center -525px"></span>
+        <span class="sr-only">Cofinanciado por COMPETE 2020, Portugal 2020 e União Europeia — Fundo Europeu de Desenvolvimento Regional</span>
+      </div>
+
+      <div class="fpv-sponsor-block">
+        <h2>Patrocinadores</h2>
+        ${ext('https://www.fidelidade.pt/', -600, 'Fidelidade', 'fpv-support-link--sponsor')}
+      </div>
+
+      <div class="fpv-partner-block">
+        <h2>Parcerias</h2>
+        <div class="fpv-partners-grid">
+          ${ext('https://www.alpha-ropes.com/', -675, 'Alpha Ropes', 'fpv-support-link--partner')}
+          ${ext('https://companhianautica.com/', -750, 'Companhia Náutica', 'fpv-support-link--partner')}
+          ${ext('https://www.dompedro.com/pt/', -825, 'Dom Pedro Hotels', 'fpv-support-link--partner')}
+          ${ext('https://www.cnalges.pt/', -900, 'Centro Náutico de Algés', 'fpv-support-link--partner')}
+          ${ext('https://www.sopromar.com/', -975, 'Sopromar Centro Náutico', 'fpv-support-link--partner')}
+        </div>
+      </div>
+    </div>`;
+
+  const bottom = footer.querySelector('.footer-bottom');
+  if (bottom) bottom.insertAdjacentElement('beforebegin', section);
+  else footer.appendChild(section);
+})();
