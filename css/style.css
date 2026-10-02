@@ -758,3 +758,67 @@ body:not(.home) main{padding-top:0}
  .page-hero p{font-size:15px}.gateway-actions{align-items:stretch;flex-direction:column}.gateway-actions .btn,.gateway-actions .text-link{justify-content:center;width:100%}
  .myfpv-gateway h1{font-size:86px}.global-result{grid-template-columns:1fr}
 }
+
+
+/* FPV footer ecosystem — current fpvela.pt parity */
+.site-footer .footer-social a{
+  width:36px;height:36px;border:0;border-radius:4px;
+  background:#24d4e5;color:#073458;
+  display:grid;place-items:center;transition:transform .2s ease,filter .2s ease
+}
+.site-footer .footer-social a:hover{transform:translateY(-2px);filter:brightness(1.05)}
+.site-footer .footer-social a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+.site-footer .footer-social svg{width:17px;height:17px;display:block}
+
+.fpv-supporters{background:#fff;color:#474747;padding:44px 0 58px}
+.fpv-supporters-inner{display:flex;flex-direction:column;align-items:center}
+.fpv-institutional-logos{
+  width:100%;padding:0 0 34px;border-bottom:1px solid #aeb4b8;
+  display:flex;align-items:center;justify-content:space-around;gap:12px;flex-wrap:wrap
+}
+.fpv-support-link{
+  min-width:120px;height:82px;display:grid;place-items:center;
+  border-radius:8px;transition:transform .2s ease,background .2s ease
+}
+.fpv-support-link:hover{transform:translateY(-2px);background:#f7f9fa}
+.fpv-support-link:focus-visible{outline:3px solid #0b5c85;outline-offset:3px}
+.fpv-support-link--wide{min-width:180px}
+.fpv-logo-mark{
+  display:block;width:150px;height:75px;
+  background-image:url("../assets/fpv-footer-logos.webp");
+  background-repeat:no-repeat;background-size:300px 1050px
+}
+.fpv-cofunded{
+  width:100%;padding:24px 0 62px;display:flex;align-items:flex-start;justify-content:flex-start
+}
+.fpv-logo-mark--funding{width:300px;height:75px}
+.fpv-sponsor-block,.fpv-partner-block{text-align:center;width:100%}
+.fpv-sponsor-block{padding:0 0 52px}
+.fpv-supporters h2{
+  margin:0 0 22px;font-family:Manrope,Arial,sans-serif;
+  font-size:18px;font-weight:600;letter-spacing:0;color:#625d59
+}
+.fpv-support-link--sponsor{width:270px;height:90px;margin:0 auto}
+.fpv-support-link--sponsor .fpv-logo-mark{width:250px;height:75px}
+.fpv-partners-grid{
+  display:flex;align-items:center;justify-content:center;gap:clamp(14px,3vw,44px);
+  flex-wrap:wrap
+}
+.fpv-support-link--partner{width:190px;height:92px}
+.fpv-support-link--partner .fpv-logo-mark{width:180px;height:75px}
+
+@media (max-width:760px){
+  .fpv-supporters{padding:34px 0 44px}
+  .fpv-institutional-logos{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px 8px;padding-bottom:26px}
+  .fpv-support-link,.fpv-support-link--wide{min-width:0;width:100%}
+  .fpv-cofunded{justify-content:center;padding:18px 0 46px}
+  .fpv-logo-mark--funding{width:min(300px,90vw)}
+  .fpv-partners-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .fpv-support-link--partner{width:100%}
+  .fpv-support-link--partner:last-child{grid-column:1/-1;justify-self:center;width:190px}
+}
+@media (max-width:430px){
+  .fpv-institutional-logos{grid-template-columns:1fr}
+  .fpv-partners-grid{grid-template-columns:1fr}
+  .fpv-support-link--partner,.fpv-support-link--partner:last-child{grid-column:auto;width:100%}
+}
