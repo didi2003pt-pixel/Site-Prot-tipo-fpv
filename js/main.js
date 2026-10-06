@@ -313,3 +313,27 @@
   if (bottom) bottom.insertAdjacentElement('beforebegin', section);
   else footer.appendChild(section);
 })();
+
+
+// FPV legal footer — local policies
+(() => {
+  const footer = document.querySelector('.site-footer');
+  if (!footer) return;
+  const links = footer.querySelector('.footer-bottom > div');
+  if (!links) return;
+
+  const privacy = [...links.querySelectorAll('a')].find(a => a.textContent.trim() === 'Privacidade');
+  if (privacy) {
+    privacy.href = 'privacidade.html';
+    privacy.removeAttribute('target');
+    privacy.removeAttribute('rel');
+  }
+
+  if (![...links.querySelectorAll('a')].some(a => a.textContent.trim() === 'Cookies')) {
+    const cookies = document.createElement('a');
+    cookies.href = 'cookies.html';
+    cookies.textContent = 'Cookies';
+    if (privacy?.nextSibling) links.insertBefore(cookies, privacy.nextSibling);
+    else links.appendChild(cookies);
+  }
+})();
