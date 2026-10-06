@@ -590,3 +590,22 @@
   .visual-v2 [data-reveal]{filter:none!important;transform:none!important}
   .visual-v2 .v2-scroll-progress{display:none}
 }
+
+
+/* Header wrap guard 2026 */
+.visual-v2 .nav-shell{width:min(calc(100% - 32px),1440px)}
+.visual-v2 .brand,.visual-v2 .nav-actions{flex-shrink:0}
+.visual-v2 .brand-copy strong,
+.visual-v2 .desktop-nav a,
+.visual-v2 .search-label,
+.visual-v2 .myfpv{white-space:nowrap}
+.visual-v2 .desktop-nav{gap:18px}
+@media (max-width:1500px){
+  .visual-v2 .search-label{display:none}
+  .visual-v2 .icon-btn{width:44px;padding:0}
+}
+@media (max-width:1320px){
+  .visual-v2 .desktop-nav{display:none}
+  .visual-v2 .menu-btn{display:block}
+}
+
