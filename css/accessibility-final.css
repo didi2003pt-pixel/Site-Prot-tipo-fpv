@@ -213,3 +213,66 @@ a.regional-association-card:hover .regional-code,a.regional-association-card:hov
   .site-header .menu-btn{display:block}
 }
 
+
+/* Descobrir — ritmo e legibilidade 2026 */
+.discover-page .journey-section{padding-top:76px;padding-bottom:76px}
+.discover-page .explain-section{padding-top:76px;padding-bottom:76px}
+.discover-page .section-paper{padding-top:76px;padding-bottom:76px}
+.discover-page .discover-network{padding-top:76px;padding-bottom:76px}
+
+.discover-page .section-heading{margin-bottom:34px}
+.discover-page .heading-copy{
+  color:#425b6a;
+  font-size:14px;
+  line-height:1.7;
+  max-width:560px;
+}
+.discover-page .journey-card-body p{
+  color:#425b6a;
+  font-size:14px;
+  line-height:1.65;
+}
+.discover-page .journey-card-body a{
+  font-size:12px;
+  line-height:1.45;
+}
+.discover-page .explain-shell{gap:72px}
+.discover-page .explain-shell>div>p{
+  color:#425b6a;
+  font-size:14px;
+  line-height:1.7;
+}
+.discover-page .explain-steps p{
+  color:#425b6a;
+  font-size:13px;
+  line-height:1.6;
+}
+.discover-page .gateway-copy p,
+.discover-page .gateway-services p{
+  color:#425b6a;
+  font-size:13px;
+  line-height:1.65;
+}
+.discover-page .discover-network-grid span{
+  font-size:11px;
+}
+.discover-page .discover-network-grid>a{
+  min-height:200px;
+}
+
+@media (max-width:760px){
+  .discover-page .journey-section,
+  .discover-page .explain-section,
+  .discover-page .section-paper,
+  .discover-page .discover-network{
+    padding-top:58px;
+    padding-bottom:58px;
+  }
+  .discover-page .section-heading{margin-bottom:28px}
+  .discover-page .heading-copy,
+  .discover-page .journey-card-body p,
+  .discover-page .explain-shell>div>p{
+    font-size:15px;
+  }
+  .discover-page .explain-shell{gap:30px}
+}
