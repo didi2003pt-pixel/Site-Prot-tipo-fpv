@@ -194,3 +194,22 @@ a.regional-association-card:hover .regional-code,a.regional-association-card:hov
   .regional-association-grid{grid-template-columns:1fr!important}
   .regional-association-card{min-height:78px!important}
 }
+
+
+/* Header wrap guard 2026 */
+.site-header .nav-shell{width:min(calc(100% - 32px),1440px)}
+.site-header .brand,.site-header .nav-actions{flex-shrink:0}
+.site-header .brand-copy strong,
+.site-header .desktop-nav a,
+.site-header .search-label,
+.site-header .myfpv{white-space:nowrap}
+.site-header .desktop-nav{gap:18px}
+@media (max-width:1500px){
+  .site-header .search-label{display:none}
+  .site-header .icon-btn{width:44px;padding:0}
+}
+@media (max-width:1320px){
+  .site-header .desktop-nav{display:none}
+  .site-header .menu-btn{display:block}
+}
+
