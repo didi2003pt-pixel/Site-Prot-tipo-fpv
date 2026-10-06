@@ -1,0 +1,15 @@
+/* Self-hosted FPV typography. Font files are served locally to avoid third-party font requests. */
+@font-face{
+  font-family:"Manrope";
+  font-style:normal;
+  font-display:swap;
+  font-weight:200 800;
+  src:url("../assets/fonts/manrope-latin-wght-normal.woff2") format("woff2");
+}
+@font-face{
+  font-family:"Space Grotesk";
+  font-style:normal;
+  font-display:swap;
+  font-weight:300 700;
+  src:url("../assets/fonts/space-grotesk-latin-wght-normal.woff2") format("woff2");
+}
