@@ -211,7 +211,7 @@
   if(searchBox && resultHost){
     const index=[
       ['Página','Descobrir a Vela','Começar, experimentar, barcos e escolas','descobrir.html'],
-      ['Descobrir','Classes de Vela','Percursos, classes praticadas, olímpicas LA28 e laboratório 3D','classes.html'],
+      ['Descobrir','Classes de Vela','Percursos, classes praticadas, vela adaptada e olímpicas LA28','classes.html'],
       ['Página','Competição','Calendário, rankings, resultados e serviços competitivos','competicao.html'],
       ['Alto Rendimento','Atletas','Equipa Olímpica e atletas por classe','atletas-equipas.html'],
       ['Alto Rendimento','Projeto Olímpico — LA 2028','Ciclo olímpico atual e documentação','projeto-olimpico.html'],
