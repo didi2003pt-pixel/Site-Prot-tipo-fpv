@@ -123,12 +123,21 @@
 
   // Current navigation state
   const current = (location.pathname.split('/').pop() || 'index.html').toLowerCase();
+  document.querySelectorAll('.desktop-nav a[href="formacao.html"]').forEach(a => {
+    a.textContent = 'Formação & Certificação';
+  });
+  document.querySelectorAll('.mobile-menu a[href="formacao.html"]').forEach(a => {
+    const number = a.querySelector('span')?.textContent || '04';
+    a.innerHTML = '<span>' + number + '</span> Formação &amp; Certificação';
+  });
+
   document.querySelectorAll('.desktop-nav a').forEach(a => {
     const href=(a.getAttribute('href')||'').split('?')[0].toLowerCase();
     const sectionMap = {
       'institucional.html':'federacao.html','assembleia-geral.html':'federacao.html','conselho-arbitragem.html':'federacao.html','documentacao.html':'federacao.html',
       'formacoes.html':'formacao.html','formacao-detalhe.html':'formacao.html',
-      'projeto-olimpico.html':'alto-rendimento.html','historico-olimpico.html':'alto-rendimento.html'
+      'projeto-olimpico.html':'alto-rendimento.html','historico-olimpico.html':'alto-rendimento.html',
+      'classes.html':'descobrir.html'
     };
     if (href === (sectionMap[current] || current)) a.setAttribute('aria-current','page');
   });
@@ -200,6 +209,7 @@
   if(searchBox && resultHost){
     const index=[
       ['Página','Descobrir a Vela','Começar, experimentar, barcos e escolas','descobrir.html'],
+      ['Descobrir','Classes de Vela','Percursos, classes praticadas, olímpicas LA28 e laboratório 3D','classes.html'],
       ['Página','Competição','Calendário, rankings, resultados e serviços competitivos','competicao.html'],
       ['Alto Rendimento','Atletas','Equipa Olímpica e atletas por classe','atletas-equipas.html'],
       ['Alto Rendimento','Projeto Olímpico — LA 2028','Ciclo olímpico atual e documentação','projeto-olimpico.html'],
