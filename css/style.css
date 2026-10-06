@@ -652,7 +652,7 @@ body:not(.home) main{padding-top:0}
 .page-hero h1 em{font-weight:500;color:var(--sky)}
 .page-hero p{max-width:660px;font-size:17px;line-height:1.75;color:#d2e0e9;margin:0}
 .gateway-competition:after,.document-hero:after,.federation-hero:after,.formation-hero-page:after,.olympic-hero:after,.governance-hero:after,.institutional-hero:after{content:"";position:absolute;inset:0;opacity:.34;background-position:center;background-size:cover}
-.gateway-competition:after{background-image:url("../assets/alto-classes-olimpicas.png")}
+.gateway-competition:after{background-image:url("../assets/fpv-volta-portugal-2026-preparacao.webp")}
 .document-hero:after{background-image:url("../assets/descobrir-conhecer-barcos.png")}
 .federation-hero:after,.institutional-hero:after,.governance-hero:after{background-image:url("../assets/alto-rendimento-portugal.png")}
 .formation-hero-page:after,.formation-list-hero:after,.course-detail-hero:after{background-image:url("../assets/descobrir-sou-familia.png")}
