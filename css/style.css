@@ -41,7 +41,7 @@ body:not(.home) .site-header{position:fixed;background:rgba(6,26,46,.96);backdro
 .hero{height:min(900px,100vh);min-height:700px;position:relative;background:var(--navy);color:#fff;overflow:hidden}
 .hero-media{position:absolute;inset:0;background:
 linear-gradient(120deg,rgba(5,25,44,.05),rgba(5,25,44,.18)),
-url("../assets/alto-projeto-olimpico.png") center/cover no-repeat;
+url("../assets/fpv-volta-portugal-2026-acao.webp") center/cover no-repeat;
 transform:scale(1.03)}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg,rgba(4,20,37,.92) 0%,rgba(4,20,37,.55) 45%,rgba(4,20,37,.1) 75%),linear-gradient(0deg,rgba(4,20,37,.52),transparent 45%)}
 .hero-content{position:relative;height:100%;display:flex;align-items:center;justify-content:space-between;padding-top:82px}
