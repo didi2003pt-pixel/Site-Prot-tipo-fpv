@@ -1,0 +1,11 @@
+SIL OPEN FONT LICENSE Version 1.1 - 26 February 2007
+
+The Manrope and Space Grotesk font files distributed in this directory are licensed under the SIL Open Font License, Version 1.1.
+
+Manrope:
+Copyright 2019 The Manrope Project Authors (https://github.com/sharanda/manrope)
+
+Space Grotesk:
+Copyright 2020 The Space Grotesk Project Authors (https://github.com/floriankarsten/space-grotesk)
+
+Full license text: https://openfontlicense.org/open-font-license-official-text/
