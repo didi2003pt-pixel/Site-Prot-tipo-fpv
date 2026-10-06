@@ -1,0 +1,92 @@
+/* FPV — Classes de Vela */
+.classes-page{background:#fff}
+.classes-hero{min-height:640px;display:flex;align-items:flex-end}
+.classes-hero:after{
+  content:"";position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(4,20,37,.94) 0%,rgba(4,20,37,.78) 44%,rgba(4,20,37,.2) 78%),
+    url("../assets/descobrir-conhecer-barcos.png") center 46%/cover no-repeat;
+  opacity:1;width:auto;height:auto;border:0;border-radius:0;right:0;top:0;
+}
+.classes-hero:before{z-index:1}
+.classes-hero .container{z-index:2}
+.classes-hero p{max-width:620px}
+.classes-kicker{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.classes-kicker span{border:1px solid rgba(255,255,255,.24);border-radius:999px;padding:9px 12px;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#d6e5ed;font-weight:800}
+
+.classes-jump{position:sticky;top:86px;z-index:7;background:rgba(255,255,255,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.classes-jump .container{display:flex;gap:26px;overflow:auto;scrollbar-width:none}
+.classes-jump .container::-webkit-scrollbar{display:none}
+.classes-jump a{white-space:nowrap;padding:17px 0;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#637684}
+.classes-jump a:hover{color:var(--ocean)}
+
+.classes-intro-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:90px;align-items:start}
+.classes-intro-grid h2,.classes-section-title h2{font:600 clamp(46px,5.7vw,78px)/.92 "Space Grotesk";letter-spacing:-.055em;margin:14px 0 0}
+.classes-intro-copy{font-size:15px;line-height:1.85;color:var(--muted);max-width:720px}
+.classes-intro-copy strong{color:var(--ink)}
+.class-definition{margin-top:26px;border-left:3px solid var(--ocean);padding:4px 0 4px 20px;font-size:13px;line-height:1.75;color:#405565}
+
+.classes-section-title{display:flex;align-items:end;justify-content:space-between;gap:40px;margin-bottom:42px}
+.classes-section-title>p{max-width:520px;color:var(--muted);line-height:1.75;font-size:13px}
+
+.route-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.route-card{min-height:390px;padding:26px;border:1px solid var(--line);border-radius:16px;display:flex;flex-direction:column;background:#fff;position:relative;overflow:hidden}
+.route-card:before{content:"";position:absolute;inset:0 0 auto;height:4px;background:var(--ocean)}
+.route-card:nth-child(2):before{background:#265f9a}.route-card:nth-child(3):before{background:#d9273e}.route-card:nth-child(4):before{background:#1396b8}
+.route-card>span{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#718694;font-weight:800}
+.route-card h3{font:600 28px/1 "Space Grotesk";letter-spacing:-.035em;margin:18px 0 12px}
+.route-card p{color:var(--muted);font-size:12px;line-height:1.7}
+.route-flow{margin-top:auto;padding-top:24px;border-top:1px solid var(--line);display:grid;gap:8px}
+.route-flow strong{font-size:11px}.route-flow small{color:#6d8190;line-height:1.5}
+
+.class-spotlight{background:#061a2e;color:#fff}
+.class-spotlight .classes-section-title p{color:#b8ccd8}
+.spotlight-grid{display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:12px}
+.spotlight-card{min-height:360px;border:1px solid rgba(255,255,255,.14);padding:30px;display:flex;flex-direction:column;background:rgba(255,255,255,.03)}
+.spotlight-card:first-child{background:linear-gradient(150deg,#0a3859,#08243a)}
+.spotlight-card>span{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:#88cbe7;font-weight:800}
+.spotlight-card h3{font:600 38px/1 "Space Grotesk";letter-spacing:-.04em;margin:18px 0}
+.spotlight-card p{font-size:12px;line-height:1.75;color:#c5d5df}
+.class-metrics{display:flex;gap:22px;flex-wrap:wrap;margin-top:auto;border-top:1px solid rgba(255,255,255,.16);padding-top:18px}
+.class-metrics div{display:grid;gap:4px}.class-metrics strong{font:600 22px "Space Grotesk"}.class-metrics small{font-size:8px;text-transform:uppercase;letter-spacing:.1em;color:#91a9b8}
+
+.olympic-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.olympic-card{border:1px solid var(--line);border-radius:14px;padding:25px;min-height:240px;display:flex;flex-direction:column;background:#fff}
+.olympic-card>span{font-size:9px;text-transform:uppercase;letter-spacing:.12em;color:var(--ocean);font-weight:800}
+.olympic-card h3{font:600 27px "Space Grotesk";margin:14px 0 8px}
+.olympic-card p{margin:0;color:var(--muted);font-size:12px;line-height:1.65}
+.olympic-events{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:20px}
+.olympic-events small{border:1px solid var(--line);border-radius:999px;padding:7px 9px;font-size:8px;font-weight:800}
+
+.national-class-cloud{display:flex;flex-wrap:wrap;gap:9px;margin-top:30px}
+.national-class-cloud span{padding:11px 14px;border:1px solid var(--line);border-radius:999px;font-size:10px;font-weight:800;background:#fff}
+.national-note{max-width:780px;color:var(--muted);line-height:1.75;font-size:13px}
+
+.lab-shell{display:grid;grid-template-columns:.82fr 1.18fr;gap:80px;align-items:start}
+.lab-copy h2{font:600 clamp(48px,6vw,82px)/.9 "Space Grotesk";letter-spacing:-.06em;margin:14px 0 26px}
+.lab-copy p{color:#c7d7e0;line-height:1.8;font-size:13px}
+.lab-status{display:inline-flex;margin-top:18px;border:1px solid rgba(255,255,255,.18);padding:9px 12px;border-radius:999px;font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#9ddbf1;font-weight:800}
+.lab-steps{border-top:1px solid rgba(255,255,255,.18)}
+.lab-step{display:grid;grid-template-columns:52px 1fr;gap:20px;padding:25px 0;border-bottom:1px solid rgba(255,255,255,.14)}
+.lab-step>span{font:600 24px "Space Grotesk";color:#4caed3}
+.lab-step strong{display:block;font:600 20px "Space Grotesk";margin-bottom:7px}
+.lab-step p{margin:0;color:#aebfca;font-size:11px;line-height:1.65}
+
+.classes-source-note{border-top:1px solid var(--line);padding-top:26px;color:#778b98;font-size:10px;line-height:1.7}
+.classes-source-note a{text-decoration:underline;text-underline-offset:3px}
+.classes-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:28px}
+
+@media(max-width:1080px){
+ .route-grid{grid-template-columns:1fr 1fr}
+ .spotlight-grid,.olympic-grid{grid-template-columns:1fr 1fr}
+ .classes-intro-grid,.lab-shell{grid-template-columns:1fr;gap:45px}
+}
+@media(max-width:760px){
+ .classes-hero{min-height:590px}
+ .classes-jump{top:72px}
+ .classes-jump .container{gap:18px}
+ .classes-section-title{display:block}.classes-section-title>p{margin-top:20px}
+ .route-grid,.spotlight-grid,.olympic-grid{grid-template-columns:1fr}
+ .route-card{min-height:330px}.spotlight-card{min-height:300px}
+ .classes-intro-grid h2,.classes-section-title h2,.lab-copy h2{font-size:48px}
+}
